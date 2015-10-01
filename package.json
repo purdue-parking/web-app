@@ -1,0 +1,12 @@
+{
+  "name": "Server",
+  "dependencies": {
+  	"bower": "*",
+    "express": "^4.8.2",
+    "express3-handlebars": "^0.5.2"
+  },
+  "scripts": {
+  	"start": "node server.js",
+  	"postinstall": "./node_modules/bower/bin/bower install"
+  }
+}

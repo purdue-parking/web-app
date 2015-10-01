@@ -1,0 +1,25 @@
+{
+  "name": "purdue-parking",
+  "version": "0.0.0",
+  "authors": [
+    "anthonynatoli <anatoli@purdue.edu>"
+  ],
+  "description": "Purdue parking web application",
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "handlebars": "~4.0.2",
+    "requirejs": "~2.1.14",
+    "underscore": "~1.6.0"
+  }
+}
