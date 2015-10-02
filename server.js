@@ -4,6 +4,7 @@ var exhbs = require( 'express3-handlebars' );
 
 var citizenRouter = require( './routes/citizen-router' );
 var policeRouter = require( './routes/police-router' );
+var towRouter = require( './routes/tow-router');
 
 var app = express();
 
@@ -22,6 +23,8 @@ app.get( '/', function( req, res ){
 app.use( '/citizen', citizenRouter );	//use router for all routes under /router/*
 
 app.use( '/police', policeRouter );
+
+app.use( '/tow', towRouter);
 
 server.listen(process.env.PORT || port, function(){
   console.log('listening on *:3000');
