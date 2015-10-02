@@ -1,25 +1,4 @@
-var express = require('express');
-var router = express.Router();
-
-router.get('/', function(req, res){
-  res.render( 'citizen-home' ); 		//renders the views/citizen-home.handlebars view
-});
-
-router.get('/account', function(req, res){
-	//TODO: make api call to get helper data
-	res.render( 'citizen-account', testData );
-});
-
-router.get('/tickets', function(req, res){
-	res.render( 'citizen-tickets' );
-});
-
-router.get('/map', function(req, res){
-	res.render( 'map' );
-});
-
 var testData = {
-	layout: 'citizen-layout',
 	name: 'Anthony'
 	, email: 'anatoli@purdue.edu'
 	, username: 'anatoli'
@@ -53,4 +32,7 @@ var testData = {
 	]
 };
 
-module.exports = router;
+// var source = $("#entry-template").html();
+// var template = Handlebars.compile(source);
+// var html = template(testData);
+// $('#result').html(html);

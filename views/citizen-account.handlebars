@@ -1,9 +1,14 @@
+<div id="result"></div>
+<!--script id="entry-template" type="text/x-handlebars-template"-->
+
 <h2>This is the accounts page</h2>
 
 <div id="account-info">
-	<h4>Name: </h4><p>Anthony Natoli</p>
-	<h4>Username: </h4><p>anatoli</p>
-	<h4>Account type: </h4><p>Citizen</p>
+	<h4>Name: </h4><p>{{name}}</p>
+	<h4>Username: </h4><p>{{username}}</p>
+	<h4>Phone number: </h4><p>{{phone}}</p>
+	<h4>Email: </h4><p>{{email}}</p>
+	<h4>Account type: </h4><p>{{account_type}}</p>
 </div>
 
 <div id="table-container">
@@ -19,14 +24,16 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>Chevrolet</td>
-				<td>Camero</td>
-				<td>2014</td>
-				<td>Red</td>
-				<td>124ABC</td>
-				<td>Indiana</td>
-			</tr>
+			{{#each cars}}
+				<tr>
+					<td>{{make}}</td>
+					<td>{{model}}</td>
+					<td>{{year}}</td>
+					<td>{{color}}</td>
+					<td>{{plate_num}}</td>
+					<td>{{state}}</td>
+				</tr>
+			{{/each}}
 		</tbody>
 	</table>
 </div>
@@ -34,3 +41,5 @@
 <button class="btn btn-primary">Edit Account</button>
 <button class="btn btn-danger">Delete Account</button>
 
+<!-- </script> -->
+<script src="/public/js/citizen-account.js"></script>
