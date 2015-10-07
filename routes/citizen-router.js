@@ -18,6 +18,10 @@ router.get('/map', function(req, res){
 	res.render( 'map' );
 });
 
+router.get('/messages', function(req, res){
+	res.render( 'message-board' );
+});
+
 var testData = {
 	layout: 'citizen-layout',
 	name: 'Anthony'
