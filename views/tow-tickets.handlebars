@@ -1,1 +1,28 @@
 <h2>Tow Company Tickets</h2>
+
+<div id="table-container">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Ticket Number</th>
+				<th>Date</th>
+				<th>License Plate Number</th>
+				<th>State</th>
+				<th>Comments</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each ticket}}
+				<tr>
+					<td>{{ticket_number}}</td>
+					<td>{{date}}</td>
+					<td>{{license_plate}}</td>
+					<td>{{state}}</td>
+					<td>{{comments}}</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>
+
+<button class="btn btn-primary">Create Tow Ticket</button>

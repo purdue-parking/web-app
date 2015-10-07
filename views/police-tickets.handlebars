@@ -1,1 +1,33 @@
-<h2>This is the Police ticket page</h2>
+<!-- Express and Express Handlebars, Handlebars.js-->
+
+<h2>Tickets</h2>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Ticket Number</th>
+			<th>Date</th>
+			<th>Parking Pass Number</th>
+			<th>License Plate Number</th>
+			<th>State</th>
+			<th>Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each ticket}}
+			<tr>
+				<td>{{ticket_number}}</td>
+				<td>{{date}}</td>
+				<td>{{parking_pass}}</td>
+				<td>{{license_plate}}</td>
+				<td>{{state}}</td>
+				<td>{{comments}}</td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>
+
+
+
+<button class="btn btn-primary">Create Ticket</button>
+

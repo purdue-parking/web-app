@@ -1,19 +1,36 @@
 var express = require('express');
 var router = express.Router();
 
+
+
 router.get('/', function(req, res){
   res.render( 'police-home', {layout: 'police-layout'} ); 		
 });
 
 router.get('/account', function(req, res){
-	res.render( 'police-account', {layout: 'police-layout'} );
+	var accountData={
+	account:[
+		{name: "Denver Kirschling", username: "dkirschl", account_type: "Police Officer"}	
+	],
+	layout: 'police-layout'
+	}
+	res.render( 'police-account', accountData );
 });
 
 router.get('/tickets', function(req, res){
-	res.render( 'police-tickets', {layout: 'police-layout'} );
+	var ticketData={
+	ticket: [
+		{ticket_number: "15823", date: "3/11/94", parking_pass: "C 105682" , license_plate: "SQH492",state: "IN",comments: "This car has been parked incorrectly"},
+		{ticket_number: "35932", date: "4/25/15", parking_pass: "NA" , license_plate: "DE8932",state: "MI",comments: "No Parking Pass"}	
+	],
+	layout: 'police-layout'
+};
+
+	res.render( 'police-tickets', ticketData);
 });
 
 router.get('/map', function(req, res){
 	res.render( 'police-map', {layout: 'police-layout'} );
 });
+
 module.exports = router;
