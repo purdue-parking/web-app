@@ -22,3 +22,7 @@ body {
 .title {
 	text-align: center;
 }
+
+body {
+	overflow: scroll;
+}

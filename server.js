@@ -11,7 +11,7 @@ var app = express();
 var server = http.createServer(app);
 var port = 3000; //for localhost testing
 
-app.engine( 'handlebars', exhbs( { defaultLayout: 'master' } ) );
+app.engine( 'handlebars', exhbs( { defaultLayout: 'citizen-layout' } ) );
 app.set( 'view engine', 'handlebars' );
 
 app.use( express.static( __dirname ) );
