@@ -5,40 +5,10 @@
 
 <div id="account-info">
 	<h4>Name: </h4><input type="text" class="account-field" id="name-field" disabled value={{name}}></input>
-	<h4>Username: </h4><input type="text" class"account-field" id="username-field" disabled value={{username}}></input>
+	<h4>Username: </h4><input type="text" class="account-field" id="username-field" disabled value={{username}}></input>
 	<h4>Phone number: </h4><input type="text" class="account-field" id="phone-field" disabled value={{phone}}></input>
 	<h4>Email: </h4><input type="text" class="account-field" id="email-field" disabled value={{email}}></input>
 	<h4>Account type: </h4><input type="text" class="account-field" id="account-type-field" disabled value={{account_type}}></input>
-</div>
-
-<div id="table-container">
-	<table class="table table-hover">
-		<thead>
-			<tr>
-				<th>Make</th>
-				<th>Model</th>
-				<th>Year</th>
-				<th>Color</th>
-				<th>License Plate Number</th>
-				<th>State</th>
-				<th><button type="button" class="btn btn-success" id="add-car">Add a car</button></th>
-			</tr>
-		</thead>
-		<tbody>
-			{{#each cars}}
-				<tr>
-					<td>{{make}}</td>
-					<td>{{model}}</td>
-					<td>{{year}}</td>
-					<td>{{color}}</td>
-					<td>{{plate_num}}</td>
-					<td>{{state}}</td>
-					<td><button type="button" class="btn btn-primary edit-car">Edit</button>
-						<button type="button" class="btn btn-danger delete-car">Delete</button></td>
-				</tr>
-			{{/each}}
-		</tbody>
-	</table>
 </div>
 
 <button class="btn btn-primary" id="editBtn">Edit Account</button>

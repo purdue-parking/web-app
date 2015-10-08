@@ -98,6 +98,10 @@ router.get('/messages', function(req, res){
 	res.render( 'message-board' );
 });
 
+router.get('/vehicles', function(req, res){
+	res.render( 'citizen-vehicles', testData );
+})
+
 var tempUser = {
 	username: 'anatoli',
 	email: 'anatoli@purdue.edu',

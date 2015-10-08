@@ -1,0 +1,33 @@
+<div id="table-container">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Make</th>
+				<th>Model</th>
+				<th>Year</th>
+				<th>Color</th>
+				<th>License Plate Number</th>
+				<th>State</th>
+				<th><button type="button" class="btn btn-success" id="add-car">Add a car</button></th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each cars}}
+				<tr>
+					<td>{{make}}</td>
+					<td>{{model}}</td>
+					<td>{{year}}</td>
+					<td>{{color}}</td>
+					<td>{{plate_num}}</td>
+					<td>{{state}}</td>
+					<td><button type="button" class="btn btn-primary edit-car">Edit</button>
+						<button type="button" class="btn btn-danger delete-car">Delete</button></td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>
+
+<button class="btn btn-success" id="saveBtn" disabled>Save Changes</button>
+
+<script src="/public/js/citizen-vehicles.js"></script>
