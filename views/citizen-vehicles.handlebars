@@ -11,23 +11,22 @@
 				<th><button type="button" class="btn btn-success" id="add-car">Add a car</button></th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody id="car-table-body">
 			{{#each cars}}
-				<tr>
-					<td>{{make}}</td>
-					<td>{{model}}</td>
-					<td>{{year}}</td>
-					<td>{{color}}</td>
-					<td>{{plate_num}}</td>
-					<td>{{state}}</td>
+				<tr data-carid={{carID}}>
+					<td><input type="text" class="table-input make-field" disabled value={{make}}></input></td>
+					<td><input type="text" class="table-input model-field" disabled value={{model}}></input></td>
+					<td><input type="text" class="table-input year-field" disabled value={{year}}></input></td>
+					<td><input type="text" class="table-input color-field" disabled value={{color}}></input></td>
+					<td><input type="text" class="table-input plate-field" disabled value={{plateNumber}}></input></td>
+					<td><input type="text" class="table-input state-field" disabled value={{plateState}}></input></td>
 					<td><button type="button" class="btn btn-primary edit-car">Edit</button>
+						<button type="button" class="btn btn-success save-car">Save</button>
 						<button type="button" class="btn btn-danger delete-car">Delete</button></td>
 				</tr>
 			{{/each}}
 		</tbody>
 	</table>
 </div>
-
-<button class="btn btn-success" id="saveBtn" disabled>Save Changes</button>
 
 <script src="/public/js/citizen-vehicles.js"></script>

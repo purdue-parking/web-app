@@ -29,23 +29,23 @@ router.get('/', function(req, res){
 });
 
 router.get('/account', function(req, res){
+	var username = req.params.username;
 	//TODO: make api call to get helper data
 	//getAccount function not written in API yet
-	// request({
-	// 	url: url_base + 'getAccount?alt=json',
-	// 	method: 'GET',
-	// 	json: req.body.username
-	// },
-	// function(error, response, body){
-	// 	if(error){
-	// 		console.log("ERROR: ", error);
-	// 		res.sendStatus(400);
-	// 	}
-	// 	else{
-	// 		res.render( 'citizen-account', body );
-	// 	}
-	// });
-	res.render( 'citizen-account', testData );
+	request({
+		url: url_base + 'entity/' + username,
+		method: 'GET',
+	},
+	function(error, response, body){
+		if(error){
+			console.log("ERROR: ", error);
+			res.sendStatus(400);
+		}
+		else{
+			res.render( 'citizen-account', body );
+		}
+	});
+	//res.render( 'citizen-account', testData );
 });
 
 router.put('/account', function(req, res){
@@ -77,13 +77,10 @@ router.delete('/account', function(req, res){
 });
 
 router.get('/tickets', function(req, res){
-	//var user = req.body.username; //Get username from client
+	var username = req.params.username; //Get username from client
 	request({
-		url: url_base + 'getTickets?alt=json',
-		method: 'GET',
-		json: {
-			username: 'anatoli'
-		}
+		url: url_base + 'ticketcollection/' + username,
+		method: 'GET'
 	},
 	function(error, response, body){
 		res.render( 'citizen-tickets', body );
@@ -99,8 +96,57 @@ router.get('/messages', function(req, res){
 });
 
 router.get('/vehicles', function(req, res){
+	var user = req.params.username;
+	request({
+		url: url_base + 'entitycollection/' + user,
+		method: 'GET'
+	},
+	function(error, response, body){
+		if(error)
+			console.log("ERROR: ", error);
+		else{
+			res.status(200);
+			//res.send(body);
+			console.log(body);
+		}
+	});
 	res.render( 'citizen-vehicles', testData );
 })
+
+router.post('/vehicles', function(req, res){
+	console.log('Post to /citizens/vehicles');
+});
+
+router.put('/vehicles', function(req, res){
+	request({
+		url: url_base + 'editVehicle?alt=json',
+		method: 'POST',
+		json: req.body
+	},
+	function(error, response, body){
+		if(error)
+			console.log("ERROR: ", error);
+		else{
+			res.status(200);
+			res.send(body);
+		}
+	});
+});
+
+router.delete('/vehicles', function(req, res){
+	request({
+		url: url_base + 'deleteVehicle?alt=json',
+		method: 'DELETE',
+		json: req.body
+	},
+	function(error, response, body){
+		if(error)
+			console.log("ERROR: ", error);
+		else{
+			res.sendStatus(200);
+		}
+	});
+});
 
 var tempUser = {
 	username: 'anatoli',
@@ -123,24 +169,27 @@ var testData = {
 			, model: 'Camaro'
 			, year: '2012'
 			, color: 'Black'
-			, plate_num: '123ABC'
-			, state: 'Indiana'
+			, plateNumber: '123ABC'
+			, plateState: 'Indiana'
+			, carID: '123124432'
 		},
 		{
 			make: 'Pontiac'
 			, model: 'G6'
 			, year: '2007'
 			, color: 'Blue'
-			, plate_num: '123ACB'
-			, state: 'Indiana'
+			, plateNumber: '123ACB'
+			, plateState: 'Indiana'
+			, carID: 'fqrr34q13'
 		},
 		{
 			make: 'BMW'
 			, model: 'M6'
 			, year: '2012'
 			, color: 'Black'
-			, plate_num: '113ABC'
-			, state: 'Indiana'
+			, plateNumber: '113ABC'
+			, plateState: 'Indiana'
+			, carID: 'qerfoq3113'
 		}
 	]
 };
