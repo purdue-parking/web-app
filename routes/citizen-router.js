@@ -29,7 +29,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/account', function(req, res){
-	var username = req.params.username;
+	var username = req.query.username;
 	//TODO: make api call to get helper data
 	//getAccount function not written in API yet
 	request({
@@ -42,7 +42,8 @@ router.get('/account', function(req, res){
 			res.sendStatus(400);
 		}
 		else{
-			res.render( 'citizen-account', body );
+			//console.log('GET account response:', JSON.parse(body).properties);
+			res.render( 'citizen-account', JSON.parse(body).properties );
 		}
 	});
 	//res.render( 'citizen-account', testData );
@@ -77,13 +78,13 @@ router.delete('/account', function(req, res){
 });
 
 router.get('/tickets', function(req, res){
-	var username = req.params.username; //Get username from client
+	var username = req.query.username; //Get username from client
 	request({
 		url: url_base + 'ticketcollection/' + username,
 		method: 'GET'
 	},
 	function(error, response, body){
-		res.render( 'citizen-tickets', body );
+		res.render( 'citizen-tickets', JSON.parse(body) );
 	});
 });
 
@@ -96,7 +97,7 @@ router.get('/messages', function(req, res){
 });
 
 router.get('/vehicles', function(req, res){
-	var user = req.params.username;
+	var user = req.query.username;
 	request({
 		url: url_base + 'entitycollection/' + user,
 		method: 'GET'
@@ -108,9 +109,10 @@ router.get('/vehicles', function(req, res){
 			res.status(200);
 			//res.send(body);
 			console.log(body);
+			res.render( 'citizen-vehicles', JSON.parse(body) );
 		}
 	});
-	res.render( 'citizen-vehicles', testData );
+	
 })
 
 router.post('/vehicles', function(req, res){
