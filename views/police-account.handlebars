@@ -2,10 +2,13 @@
 
 <div id="account-info">
 	{{#each account}}
-	<h4>Name: </h4><p>{{name}}</p>
-	<h4>Username: </h4><p>{{username}}</p>
-	<h4>Account type: </h4><p>{{account_type}}</p>
+	<h4>Name: </h4><input type="text" class="account-field" id="name-field" disabled value={{name}}></input></h4>
+	<h4>Username: </h4><input type="text" class="account-field" id="username-field" disabled value={{username}}></input></h4>
+	<h4>Account type: </h4><input type="text" class="account-field-nochange" id="accountType-field" disabled value={{account_type}}></input></h4>
 	{{/each}}
 </div>
 
+<button class="btn btn-primary" id="editBtn">Edit Account</button>
+<button class="btn btn-success" id="saveBtn" disabled>Save</button>
 
+<script src="/public/js/police-account.js"></script>
