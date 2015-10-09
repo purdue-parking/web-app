@@ -18,6 +18,16 @@ $('.delete-car').click(function(){
 
 $('.save-car').click(function(){
 	$(this).closest('tr').find('.table-input').prop('disabled', true);
+	// $.ajax({
+	// 	url: window.location,
+	// 	method: 'POST',
+	// 	dataType: 'json',
+	// 	data: {
+			
+	// 	}
+	// }).done(function(){
+		
+	// });
 });
 
 $('#add-car').click(function(){

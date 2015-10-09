@@ -14,16 +14,30 @@ $('#saveBtn').click(function(){
 	$('.account-field').prop("disabled", true);
 	
 	//TODO: save all fields
-	// $.ajax({
-	// 	url: '/account',
-	// 	method: 'PUT',
-	// 	dataType: 'json',
-	// 	data: {
-	// 		username: 
-	// 		email:
-	// 		phoneNumber:
-	// 		accountType:
-	// 	},
+	$.ajax({
+		url: window.location,
+		method: 'PUT',
+		dataType: 'json',
+		data: {
+			username: $('#username-field').val(),
+			email: $('#email-field').val(),
+			phoneNumber: $('#phone-field').val(),
+			name: $('#name-field').val()
+		}
+	}).done(function(){
 
-	// });
+	});
+});
+
+$('#deleteBtn').click(function(){
+	$.ajax({
+		url: window.location,
+		method: 'DELETE',
+		dataType: 'json',
+		data: JSON.stringify({
+			'username': 'deletethis'
+		})
+	}).done(function(){
+		console.log("deleted user: deletethis");
+	});
 });
