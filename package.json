@@ -1,6 +1,7 @@
 {
   "name": "Server",
   "dependencies": {
+    "body-parser": "^1.14.1",
     "bower": "*",
     "express": "^4.8.2",
     "express3-handlebars": "^0.5.2",

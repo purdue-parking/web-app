@@ -1,6 +1,9 @@
 var express = require('express');
 var request = require('request');
+var bodyParser = require('body-parser');
+
 var router = express.Router();
+var jsonParser = bodyParser.json();
 
 var url_base = 'https://purdue-parking.appspot.com/_ah/api/purdueParking/1/'
 
@@ -43,18 +46,20 @@ router.get('/account', function(req, res){
 		}
 		else{
 			//console.log('GET account response:', JSON.parse(body).properties);
+			// console.log(JSON.parse(body).properties);
 			res.render( 'citizen-account', JSON.parse(body).properties );
 		}
 	});
 	//res.render( 'citizen-account', testData );
 });
 
-router.put('/account', function(req, res){
-	tempUser = req.body;
+router.put('/account', jsonParser, function(req, res){
+	//tempUser = req.body;
+	console.log("Here:", req.body);
 	request({
 		url: url_base + 'editAccount?alt=json',
 		method: 'POST',
-		json: tempUser
+		json: req.body
 	},
 	function(error, response, body){
 		if(error)
@@ -62,11 +67,15 @@ router.put('/account', function(req, res){
 	});
 });
 
-router.delete('/account', function(req, res){
+router.delete('/account', jsonParser, function(req, res){
+	console.log(req);
+	// console.log("delete user: ", req.body.username);
 	request({
 		url: url_base + 'deleteAccount?alt=json',
 		method: 'DELETE',
-		json: req.body.username
+		json: {
+			username: req.body.username
+		}
 	},
 	function(error, response, body){
 		if(error)
@@ -84,7 +93,14 @@ router.get('/tickets', function(req, res){
 		method: 'GET'
 	},
 	function(error, response, body){
-		res.render( 'citizen-tickets', JSON.parse(body) );
+		if(error){
+			res.send(error);
+		}
+		else{
+			console.log(body);
+			res.render( 'citizen-tickets', JSON.parse(body) );
+		}
+		
 	});
 });
 
@@ -93,7 +109,7 @@ router.get('/map', function(req, res){
 });
 
 router.get('/messages', function(req, res){
-	res.render( 'message-board' );
+	res.render( 'message-board', testMessages );
 });
 
 router.get('/vehicles', function(req, res){
@@ -108,18 +124,31 @@ router.get('/vehicles', function(req, res){
 		else{
 			res.status(200);
 			//res.send(body);
-			console.log(body);
+			// console.log(body);
 			res.render( 'citizen-vehicles', JSON.parse(body) );
 		}
 	});
 	
 })
 
-router.post('/vehicles', function(req, res){
+router.post('/vehicles', jsonParser, function(req, res){
 	console.log('Post to /citizens/vehicles');
+	request({
+		url: url_base + 'addVehicle?alt=json',
+		method: 'POST',
+		json: req.body
+	},
+	function(error, response, body){
+		if(error)
+			console.log("ERROR: ", error);
+		else{
+			res.status(200);
+			res.send(body);
+		}
+	});
 });
 
-router.put('/vehicles', function(req, res){
+router.put('/vehicles', jsonParser, function(req, res){
 	request({
 		url: url_base + 'editVehicle?alt=json',
 		method: 'POST',
@@ -135,7 +164,7 @@ router.put('/vehicles', function(req, res){
 	});
 });
 
-router.delete('/vehicles', function(req, res){
+router.delete('/vehicles', jsonParser, function(req, res){
 	request({
 		url: url_base + 'deleteVehicle?alt=json',
 		method: 'DELETE',
@@ -156,7 +185,21 @@ var tempUser = {
 	name: 'Anthony Natoli',
 	phoneNumber: '1234567890',
 	accountType: 'Citizen'
-}
+};
+
+var testMessages = {
+	testMsgs: [
+		{
+			message: 'I need help!'
+		},
+		{
+			message: "I need help too, I'm in the Ross Ade parking lot"
+		},
+		{
+			message: "Are C lots open to everyone right now?"
+		}
+	]
+};
 
 var testData = {
 	layout: 'citizen-layout',

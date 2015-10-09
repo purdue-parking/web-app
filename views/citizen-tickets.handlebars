@@ -6,16 +6,19 @@
 				<th>Date</th>
 				<th>Ticket Number</th>
 				<th>License Plate</th>
+				<th>Reason</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
 			{{#each items}}
 				<tr>
-					<td>John</td>
-					<td>Doe</td>
-					<td>124ABC</td>
-					<td><button type="button" class="btn btn-primary pay-btn">Pay</button></td>
+					<td>{{date}}</td>
+					<td class=".ticket-num">{{ticketNum}}</td>
+					<td>{{plateNum}}</td>
+					<td>{{reason}}</td>
+					<td><button type="button" class="btn btn-primary pay-btn">Pay</button>
+						<button type="button" class="btn btn-primary appeal-btn">Appeal</td>
 				</tr>
 			{{/each}}
 		</tbody>
