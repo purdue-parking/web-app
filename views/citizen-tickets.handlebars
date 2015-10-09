@@ -10,12 +10,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>John</td>
-				<td>Doe</td>
-				<td>124ABC</td>
-				<td><button type="button" class="btn btn-primary pay-btn">Pay</button></td>
-			</tr>
+			{{#each items}}
+				<tr>
+					<td>John</td>
+					<td>Doe</td>
+					<td>124ABC</td>
+					<td><button type="button" class="btn btn-primary pay-btn">Pay</button></td>
+				</tr>
+			{{/each}}
 		</tbody>
 	</table>
 </div>

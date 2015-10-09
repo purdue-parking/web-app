@@ -14,4 +14,16 @@ $('#saveBtn').click(function(){
 	$('.account-field').prop("disabled", true);
 	
 	//TODO: save all fields
+	// $.ajax({
+	// 	url: '/account',
+	// 	method: 'PUT',
+	// 	dataType: 'json',
+	// 	data: {
+	// 		username: 
+	// 		email:
+	// 		phoneNumber:
+	// 		accountType:
+	// 	},
+
+	// });
 });

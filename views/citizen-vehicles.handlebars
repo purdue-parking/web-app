@@ -1,0 +1,32 @@
+<div id="table-container">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Make</th>
+				<th>Model</th>
+				<th>Year</th>
+				<th>Color</th>
+				<th>License Plate Number</th>
+				<th>State</th>
+				<th><button type="button" class="btn btn-success" id="add-car">Add a car</button></th>
+			</tr>
+		</thead>
+		<tbody id="car-table-body">
+			{{#each items}}
+				<tr data-carid={{properties.carID}}>
+					<td><input type="text" class="table-input make-field" disabled value={{properties.make}}></input></td>
+					<td><input type="text" class="table-input model-field" disabled value={{properties.model}}></input></td>
+					<td><input type="text" class="table-input year-field" disabled value={{properties.year}}></input></td>
+					<td><input type="text" class="table-input color-field" disabled value={{properties.color}}></input></td>
+					<td><input type="text" class="table-input plate-field" disabled value={{properties.plateNumber}}></input></td>
+					<td><input type="text" class="table-input state-field" disabled value={{properties.plateState}}></input></td>
+					<td><button type="button" class="btn btn-primary edit-car">Edit</button>
+						<button type="button" class="btn btn-success save-car">Save</button>
+						<button type="button" class="btn btn-danger delete-car">Delete</button></td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>
+
+<script src="/public/js/citizen-vehicles.js"></script>
