@@ -18,12 +18,14 @@ $('#saveBtn').click(function(){
 		url: window.location,
 		method: 'PUT',
 		dataType: 'json',
-		data: {
+		contentType: 'application/json',
+		data: JSON.stringify({
 			username: $('#username-field').val(),
 			email: $('#email-field').val(),
 			phoneNumber: $('#phone-field').val(),
-			name: $('#name-field').val()
-		}
+			name: $('#name-field').val(),
+			accountType: $('#account-type-field').val()
+		})
 	}).done(function(){
 
 	});

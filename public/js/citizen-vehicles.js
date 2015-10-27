@@ -8,9 +8,11 @@ $('.delete-car').click(function(){
 	$.ajax({
 		url: window.location
 		, type: 'DELETE'
-		, data: {
+		, dataType: 'json'
+		, contentType: 'application/json'
+		, data: JSON.stringify({
 			carID: carId
-		}
+		})
 	}).done(function(){
 		row.remove();
 	});
@@ -18,16 +20,26 @@ $('.delete-car').click(function(){
 
 $('.save-car').click(function(){
 	$(this).closest('tr').find('.table-input').prop('disabled', true);
-	// $.ajax({
-	// 	url: window.location,
-	// 	method: 'POST',
-	// 	dataType: 'json',
-	// 	data: {
-			
-	// 	}
-	// }).done(function(){
-		
-	// });
+	var car = $(this).closest('tr');
+	// console.log("car id is ", car.data('carid'))
+	$.ajax({
+		url: window.location
+		, method: 'POST'
+		, dataType: 'json'
+		, contentType: 'application/json'
+		, data: JSON.stringify({
+			carID: car.data('carid')
+			, color: car.find('.color-field').val()
+			, make: car.find('.make-field').val()
+			, model: car.find('.model-field').val()
+			, owner: car.data('owner')
+			, plateNumber: car.find('.plate-field').val()
+			, plateState: car.find('.state-field').val()
+			, year: car.find('.year-field').val()
+		})
+	}).done(function(){
+		alert('Done!');
+	});
 });
 
 $('#add-car').click(function(){

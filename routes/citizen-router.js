@@ -55,7 +55,7 @@ router.get('/account', function(req, res){
 
 router.put('/account', jsonParser, function(req, res){
 	//tempUser = req.body;
-	console.log("Here:", req.body);
+	// console.log("Here: ", req.body);
 	request({
 		url: url_base + 'editAccount?alt=json',
 		method: 'POST',
