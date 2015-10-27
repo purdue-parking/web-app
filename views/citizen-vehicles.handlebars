@@ -13,7 +13,7 @@
 		</thead>
 		<tbody id="car-table-body">
 			{{#each items}}
-				<tr data-carid={{properties.carID}}>
+				<tr data-carid={{properties.carID}} data-owner={{properties.owner}}>
 					<td><input type="text" class="table-input make-field" disabled value={{properties.make}}></input></td>
 					<td><input type="text" class="table-input model-field" disabled value={{properties.model}}></input></td>
 					<td><input type="text" class="table-input year-field" disabled value={{properties.year}}></input></td>
