@@ -1,3 +1,49 @@
-<h2>Map</h2>
+<div id="wrapper">
+	<div id="canvasContainer" width="580" height="750">
+		<canvas id="mapCanvas" width="580" height = "750"></canvas>
+		<img id="canvasImg" alt="Right click to save me!">
+	</div>
 
-<img src="https://cglotzba.files.wordpress.com/2008/02/purduemap.gif" height="600" width="600">
+	<div id="buttonContainer">
+		<table id="settingsTable">
+			<tr id="toolbarRow" class="headerRow">
+				<th class="headerFont" colspan="4">Toolbar</th>
+			</tr>
+			<tr>
+				<td><button id="line" onclick="changeShape(this)">Line</button></td>
+				<td><button id="rectangle" onclick="changeShape(this)">Rectangle</button></td>
+			</tr>
+			<tr class="headerRow">
+				<th class="headerFont"colspan="4">Color</th>
+			</tr>
+			<tr>
+				<td><button id="purple"onclick="color(this)">Purple</button></td>
+				<td><button id="green"onclick="color(this)">Green</button></td>
+				<td><button id="yellow"onclick="color(this)">Yellow</button></td>
+				<td><button id="brown"onclick="color(this)">Brown</button></td>
+			</tr>
+			<tr class="headerRow">
+				<th class="headerFont" colspan="4">Size</th>
+			</tr>
+			<tr>
+				<td><button id="small"onclick="changeSize(this)">Small</button></td>
+				<td><button id="normal"onclick="changeSize(this)">Normal</button></td> 
+				<td><button id="large"onclick="changeSize(this)">Large</button></td>
+				<td><button id="huge"onclick="changeSize(this)">Huge</button></td> 
+			</tr>
+			<tr>
+				<td><button id="clearButton" onclick="clearCanvas()">Clear</button></td>
+				<td><button id="saveButton" onclick="save()">Save</button></td>
+			</tr>
+		</table> 
+	</div>
+</div>
+
+<script type="text/javascript"> 
+	$(document).ready(function() {
+		prepareCanvas();
+	});
+</script>
+
+<script src="/public/js/police-map.js"></script>
+  

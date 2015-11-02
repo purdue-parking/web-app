@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-
+var url_base = 'https://purdue-parking.appspot.com/_ah/api/purdueParking/1/'
 
 router.get('/', function(req, res){
   res.render( 'police-home', {layout: 'police-layout'} ); 		
@@ -24,6 +24,12 @@ router.get('/tickets', function(req, res){
 		{ticket_number: "35932", date: "4/25/15", parking_pass: "NA" , license_plate: "DE8932",state: "MI",comments: "No Parking Pass"}	
 	],
 	layout: 'police-layout'
+
+	request({
+		url: url_base + 'createTicket?alt=json',
+		method: 'POST',
+		json: req.body
+	})
 };
 
 	res.render( 'police-tickets', ticketData);

@@ -1,0 +1,26 @@
+#buttonContainer{
+	width: 400px;
+	height: 300px;
+	float: left;
+	padding: 0px 10px;
+}
+
+#canvasContainer{
+	width: 580px;
+	height: 750px;
+	float: left;
+	border: 2px black;
+}
+
+#wrapper{
+	width: 100%;
+	display: inline-block;
+}
+
+.headerRow{
+	font-style: bold;
+}
+
+.headerFont{
+	font-style: bold;
+}
