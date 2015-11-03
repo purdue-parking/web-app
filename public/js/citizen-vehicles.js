@@ -7,7 +7,7 @@ $('.delete-car').click(function(){
 	var carId = row.data('carid');
 	$.ajax({
 		url: window.location
-		, type: 'DELETE'
+		, method: 'DELETE'
 		, dataType: 'json'
 		, contentType: 'application/json'
 		, data: JSON.stringify({

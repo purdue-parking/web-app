@@ -8,8 +8,18 @@
 		</thead>
 		<tbody id="msg-table-body">
 			{{#each testMsgs}}
-				<tr>
-					<td><input type="text" class="table-input make-field" disabled value={{message}}></input></td>
+				<tr class="message-row" id="{{messageID}}">
+					<!--td><input type="text" class="table-input message-field" disabled value={{message}}></input></td-->
+					<td class="message-field">{{{message}}}</td>
+					<td class="message-votes"><div id="voteCount" style="float: left; margin-left: 8px; margin-top: 4px">{{votes}}</div>
+					<div id="vote-buttons" style="float: left">
+						<button type="button" class="btn btn-info" id="upBtn">
+							<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+						</button>
+						<button type="button" class="btn btn-info" id="downBtn">
+							<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+						</button>
+					</div></td>
 				</tr>
 			{{/each}}
 		</tbody>

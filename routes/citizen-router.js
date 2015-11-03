@@ -1,6 +1,7 @@
 var express = require('express');
 var request = require('request');
 var bodyParser = require('body-parser');
+var _ = require('underscore');
 
 var router = express.Router();
 var jsonParser = bodyParser.json();
@@ -47,6 +48,7 @@ router.get('/account', function(req, res){
 		else{
 			//console.log('GET account response:', JSON.parse(body).properties);
 			// console.log(JSON.parse(body).properties);
+			console.log(JSON.parse(body).properties);
 			res.render( 'citizen-account', JSON.parse(body).properties );
 		}
 	});
@@ -109,13 +111,25 @@ router.get('/map', function(req, res){
 });
 
 router.get('/messages', function(req, res){
-	res.render( 'message-board', testMessages );
+	var temp = testMessages; //deleteSpaces(testMessages.testMsgs);
+	// testMessages.testMsgs[0].message = testMessages.testMsgs[0].message.replace(/\s/g, '_');
+	res.render( 'message-board', temp);
+});
+
+router.get('/messages/:id', function(req, res){
+	console.log(req.query.message);
+	var response = {
+		message: req.query.message
+		, comments : [ {comment: 'This is a comment'}, {comment: 'This is another comment'}, {comment:'This is a third comment'}, {comment: 'A 4th'}]
+		, votes: req.query.votes
+	}
+	res.render('message', response);
 });
 
 router.get('/vehicles', function(req, res){
 	var user = req.query.username;
 	request({
-		url: url_base + 'entitycollection/' + user,
+		url: url_base + 'vehiclecollection/' + user,
 		method: 'GET'
 	},
 	function(error, response, body){
@@ -124,7 +138,7 @@ router.get('/vehicles', function(req, res){
 		else{
 			res.status(200);
 			//res.send(body);
-			// console.log(body);
+			console.log(JSON.parse(body));
 			res.render( 'citizen-vehicles', JSON.parse(body) );
 		}
 	});
@@ -179,6 +193,23 @@ router.delete('/vehicles', jsonParser, function(req, res){
 	});
 });
 
+function deleteSpaces( arr ) {
+	var x = 0;
+	var tempObj = {};
+	var sendableMsgs = { testMsgs: [] };
+	arr.forEach(function(msg){
+		replacedMsg = msg.message.replace(/\s/g, '_');
+		tempObj = msg;
+		tempObj.message = replacedMsg;
+		sendableMsgs.testMsgs.push( tempObj );
+	});
+	return sendableMsgs;
+}
+
+function insertSpaces( str ) {
+	return str.replace(/_/g, ' ');
+}
+
 var tempUser = {
 	username: 'anatoli',
 	email: 'anatoli@purdue.edu',
@@ -191,12 +222,30 @@ var testMessages = {
 	testMsgs: [
 		{
 			message: 'I need help!'
+			, timePosted: new Date()
+			, owner: 'anatoli'
+			, helpNeeded: true
+			, messageID: 'abeoa32ab'
+			, votes: 10
+			, resolved: false
 		},
 		{
 			message: "I need help too, I'm in the Ross Ade parking lot"
+			, timePosted: new Date()
+			, owner: 'anthony'
+			, helpNeeded: true
+			, messageID: '123'
+			, votes: 25
+			, resolved: true
 		},
 		{
 			message: "Are C lots open to everyone right now?"
+			, timePosted: new Date()
+			, owner: 'anatoli'
+			, helpNeeded: false
+			, messageID: '15123'
+			, votes: 2
+			, resolved: false 
 		}
 	]
 };
