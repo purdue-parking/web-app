@@ -1,1 +1,19 @@
+<div id="table-container">
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Message</th>
+				<th><button type="button" class="btn btn-success" id="add-msg">Add a message</button></th>
+			</tr>
+		</thead>
+		<tbody id="msg-table-body">
+			{{#each testMsgs}}
+				<tr>
+					<td><input type="text" class="table-input make-field" disabled value={{message}}></input></td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</div>
+
 <script src="/public/js/message-board.js"></script>

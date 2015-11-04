@@ -14,6 +14,7 @@ var drawWidth = 2;
 var drawShape = "line";
 
 var topMap = new Image();
+var imageName;
 
 function prepareCanvas(){
 	canvas = document.getElementById('mapCanvas');
@@ -128,11 +129,19 @@ function clearCanvas(){
 
 function save(){
 	console.log("Saving the element");
+	$('#myModal').modal('show');
+}
+
+$('#saveImageButton').click(function(){
+	imageName = $('#save-image-name').val();
+	console.log(imageName);
 	document.getElementById("canvasImg").style.border = "2px solid";
 	var dataURL = canvas.toDataURL();
+	console.log(dataURL);
 	document.getElementById("canvasImg").src = dataURL;
 	document.getElementById("canvasImg").style.display = "inline";
-}
+});
+
 
 function findxy(res, e){
 	if(res == "down"){
@@ -164,19 +173,11 @@ function findxy(res, e){
 			prevY = currY;
 			getCursorPosition(e);
 			
-			//var rect_width = currX - prevX;
-			//var rect_diff = rect_width / 5;
-			
 			ctx.beginPath();
 			ctx.strokeStyle = drawColor;
 			ctx.lineWidth = drawWidth;
 			drawRect();
 
-			console.log("Previous x: " + prevX + " Previous y: " + prevY + " Current x: " + currX + " Current y: " + currY);
-
-			
-			//ctx.moveTo(currX, prevY); //Move to the top left corner
-			//ctx.lineTo(currX - rect_diff, currY);
 			ctx.stroke();
 			ctx.closePath();
 		}
@@ -211,16 +212,27 @@ function drawRect(){
 	ctx.lineTo(prevX, prevY); //Draw to the top left
 
 	var rectangle_width = Math.abs(currX - prevX);
-	var move_by = rectangle_width / 5;
+	var number_of_lines = 5;
+	var move_by = rectangle_width / number_of_lines;
 
-	ctx.moveTo(currX, prevY);
-	ctx.lineTo(currX - move_by, currY);
-	ctx.moveTo(currX - move_by, prevY);
-	ctx.lineTo(currX - 2*move_by, currY);
-	ctx.moveTo(currX - 2*move_by, prevY);
-	ctx.lineTo(currX - 3*move_by, currY);
-	ctx.moveTo(currX - 3*move_by, prevY);
-	ctx.lineTo(currX - 4*move_by, currY);
-	ctx.moveTo(currX - 4*move_by, prevY);
-	ctx.lineTo(currX - 5*move_by, currY);
+	var x = 0;
+	for(x; x < number_of_lines; x++){
+		if(currX > prevX && currY < prevY)
+		{
+			ctx.moveTo(currX - (x*move_by), prevY);
+			ctx.lineTo(currX - ((x+1)*move_by), currY);
+		}
+		else if(currX > prevX && currY > prevY){
+			ctx.moveTo(currX - (x*move_by), currY);
+			ctx.lineTo(currX -((x+1)*move_by), prevY);
+		}
+		else if(currX < prevX && currY < prevY){
+			ctx.moveTo(prevX - (x*move_by), prevY);
+			ctx.lineTo(prevX - ((x+1)*move_by), currY);
+		}
+		else{
+			ctx.moveTo(prevX - (x*move_by), currY);
+			ctx.lineTo(prevX - ((x+1)*move_by), prevY);
+		}
+	}
 }

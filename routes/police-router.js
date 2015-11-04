@@ -1,5 +1,9 @@
 var express = require('express');
+var request = require('request');
 var router = express.Router();
+var bodyParser = require('body-parser');
+
+var jsonParser = bodyParser.json();
 
 var url_base = 'https://purdue-parking.appspot.com/_ah/api/purdueParking/1/'
 
@@ -18,21 +22,25 @@ router.get('/account', function(req, res){
 });
 
 router.get('/tickets', function(req, res){
-	var ticketData={
-	ticket: [
-		{ticket_number: "15823", date: "3/11/94", parking_pass: "C 105682" , license_plate: "SQH492",state: "IN",comments: "This car has been parked incorrectly"},
-		{ticket_number: "35932", date: "4/25/15", parking_pass: "NA" , license_plate: "DE8932",state: "MI",comments: "No Parking Pass"}	
-	],
-	layout: 'police-layout'
+	//Get all tickets function since they are a police man/woman
+	res.render( 'police-tickets', 'police-layout');
+});
 
+router.post('/tickets', jsonParser, function(req, res){
 	request({
-		url: url_base + 'createTicket?alt=json',
+		url: url_base + 'addTicket?alt=json',
 		method: 'POST',
 		json: req.body
-	})
-};
-
-	res.render( 'police-tickets', ticketData);
+	},
+ 	function(error, response, body){
+	 	if( error )
+	 		console.log("ERROR: ", error);
+	 	else{
+	 		res.status(200);
+	 		res.send(body);
+	 	}
+	});
+	console.log(req.body);
 });
 
 router.get('/map', function(req, res){

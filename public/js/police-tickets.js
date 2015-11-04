@@ -16,26 +16,29 @@ $('#newTicketBtn').click(function(){
 	var ticketLicensePlate = $('#new-ticket-license-plate').val();
 	var ticketState = $('#new-ticket-state').val();
 	var ticketComments = $('#new-ticket-comments').val();
+
 	$.ajax({
 		url: window.location
-		, method: 'GET'
+		, method: 'POST'
 		, contentType: 'application/json'
-		, data: {
-			ticketNum: ticketNumber,
-			plateNum: ticketLicensePlate,
-			plateState: ticketLicensePlate,
-			time: ticketDate,
+		, data: JSON.stringify({
+			ticketNumber: ticketNumber,
+			plateNumber: ticketLicensePlate,
+			plateState: ticketState,
+			time: ticketTime,
 			date: ticketDate,
 			reason: ticketComments,
-			towAddress: null
-		}
-	})
-	$('#ticketTable').append(newRow(ticketNumber, ticketDate, ticketParkingPass, ticketLicensePlate, ticketState, ticketComments));
+			towAddress: 'N/A'
+		})
+	});
+
+	$('#ticketTable').append(newRow(ticketNumber, ticketDate, ticketTime, ticketParkingPass, ticketLicensePlate, ticketState, ticketComments));
 });
 
-function newRow(ticketNumber, ticketDate, ticketParkingPass, ticketLicensePlate, ticketState, ticketComments){
+function newRow(ticketNumber, ticketDate, ticketTime, ticketParkingPass, ticketLicensePlate, ticketState, ticketComments){
 	var newRow = '<tr>'
 					+ '<td>' + ticketNumber + '</td>'
+					+ '<td>' + ticketTime + '</td>'
 					+ '<td>' + ticketDate + '</td>'
 					+ '<td>' + ticketParkingPass + '</td>'
 					+ '<td>' + ticketLicensePlate + '</td>'
