@@ -1,0 +1,30 @@
+<div id="full-container">
+	<div id="top-container">
+		<div id="msg-container" data-msgid="{{messageID}}">
+			{{{message}}}
+		</div>
+		<div id="vote-container">
+			<div id="vote-buttons" style="float: left">
+				<button type="button" class="btn btn-info" id="upBtn">
+					<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+				</button>
+				<button type="button" class="btn btn-info" id="downBtn">
+					<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+				</button>
+			</div>
+			<div id="voteCount" style="float: left; margin-left: 8px; margin-top: 4px">{{votes}}</div>
+		</div>
+	</div>
+	<div id="comments-container">
+		{{#each comments}}
+			<div class="comment">{{{comment}}}</div>
+		{{/each}}
+	</div>
+	<div id="write-container">
+		<input type="text" id="comment-input"></input>
+		<br>
+		<button type="button" class="btn btn-success" id="comment-btn">Comment</button>
+	</div>
+</div>
+
+<script src="/public/js/message.js"></script>

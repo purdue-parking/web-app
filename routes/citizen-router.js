@@ -1,6 +1,9 @@
 var express = require('express');
 var request = require('request');
 var bodyParser = require('body-parser');
+var _ = require('underscore');
+
+require('dotenv').load();
 
 var router = express.Router();
 var jsonParser = bodyParser.json();
@@ -47,6 +50,7 @@ router.get('/account', function(req, res){
 		else{
 			//console.log('GET account response:', JSON.parse(body).properties);
 			// console.log(JSON.parse(body).properties);
+			console.log(JSON.parse(body).properties);
 			res.render( 'citizen-account', JSON.parse(body).properties );
 		}
 	});
@@ -109,13 +113,53 @@ router.get('/map', function(req, res){
 });
 
 router.get('/messages', function(req, res){
-	res.render( 'message-board', testMessages );
+	request({
+		url: url_base + 'messagecollection/1'
+		, method: 'GET'
+	},
+	function(error, response, body){
+		if(error){
+			res.send(error);
+		}
+		res.render( 'message-board', JSON.parse(body) );
+	});
+});
+
+router.get('/messages/:id', function(req, res){
+	var id = req.params.id;
+	var finalResponse = {
+		message: req.query.message
+		, messageID: id
+		, comments : []
+		, votes: req.query.votes
+	}
+	request({
+		url: url_base + 'commentcollection/' + id
+		, method: 'GET'
+	},
+	function(error, response, body){
+		finalResponse.comments = JSON.parse(body).items;
+		res.render('message', finalResponse);
+	});
+});
+
+router.post('/messages/:id', jsonParser, function(req, res){
+	console.log(req.body);
+	request({
+		url: url_base + 'addComment'
+		, method: 'POST'
+		, json: req.body
+	},
+	function(error, response, body){
+		// console.log(JSON.parse(body));
+		res.sendStatus(200);
+	});
 });
 
 router.get('/vehicles', function(req, res){
 	var user = req.query.username;
 	request({
-		url: url_base + 'entitycollection/' + user,
+		url: url_base + 'vehiclecollection/' + user,
 		method: 'GET'
 	},
 	function(error, response, body){
@@ -124,7 +168,7 @@ router.get('/vehicles', function(req, res){
 		else{
 			res.status(200);
 			//res.send(body);
-			// console.log(body);
+			console.log(JSON.parse(body));
 			res.render( 'citizen-vehicles', JSON.parse(body) );
 		}
 	});
@@ -191,12 +235,30 @@ var testMessages = {
 	testMsgs: [
 		{
 			message: 'I need help!'
+			, timePosted: new Date()
+			, owner: 'anatoli'
+			, helpNeeded: true
+			, messageID: 'abeoa32ab'
+			, votes: 10
+			, resolved: false
 		},
 		{
 			message: "I need help too, I'm in the Ross Ade parking lot"
+			, timePosted: new Date()
+			, owner: 'anthony'
+			, helpNeeded: true
+			, messageID: '123'
+			, votes: 25
+			, resolved: true
 		},
 		{
 			message: "Are C lots open to everyone right now?"
+			, timePosted: new Date()
+			, owner: 'anatoli'
+			, helpNeeded: false
+			, messageID: '15123'
+			, votes: 2
+			, resolved: false 
 		}
 	]
 };
