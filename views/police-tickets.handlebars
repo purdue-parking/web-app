@@ -1,0 +1,61 @@
+<!-- Express and Express Handlebars, Handlebars.js-->
+
+<h2>Tickets</h2>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Ticket Number</th>
+			<th>Time</th>
+			<th>Date</th>
+			<th>Parking Pass Number</th>
+			<th>License Plate Number</th>
+			<th>State</th>
+			<th>Comments</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody id="ticketTable">
+		{{#each ticket}}
+			<tr>
+				<td>{{ticket_number}}</td>
+				<td>{{time}}</td>
+				<td>{{date}}</td>
+				<td>{{parking_pass}}</td>
+				<td>{{license_plate}}</td>
+				<td>{{state}}</td>
+				<td>{{comments}}</td>
+				<td><button type="button" class="btn btn-primary edit-ticket">Edit</button></td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>
+
+<button class="btn btn-primary" id="createBtn">New Ticket</button>
+
+<div class="modal fade" id="myModal">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title">Create a Ticket</h4>
+      		</div>
+      		<div class="modal-body">
+      	 		<h4>Ticket Number:</h4><input type="text" class="new-ticket-field" id="new-ticket-number"></input>
+      	 		<h4>Time:</h4><input type="text" class="new-ticket-field" id="new-ticket-time"></input>
+      	 		<h4>Date:</h4><input type="text" class="new-ticket-field" id="new-ticket-date"></input>
+      	 		<h4>Parking Pass:</h4><input type="text" class="new-ticket-field" id="new-ticket-parking-pass"></input>
+      	 		<h4>License Plate:</h4><input type="text" class="new-ticket-field" id="new-ticket-license-plate"></input>
+      	 		<h4>State:</h4><input type="text" class="new-ticket-field" id="new-ticket-state"></input>
+      	 		<h4>Comments:</h4><input type="text" class="new-ticket-field" id="new-ticket-comments"></input>
+     		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       			<button type="button" class="btn btn-primary" data-dismiss="modal" id="newTicketBtn">Create Ticket</button>
+      		</div>
+    	</div><!-- /.modal-content -->
+  	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="/public/js/police-tickets.js"></script>
+
