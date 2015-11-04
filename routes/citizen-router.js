@@ -3,6 +3,8 @@ var request = require('request');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
 
+require('dotenv').load();
+
 var router = express.Router();
 var jsonParser = bodyParser.json();
 
