@@ -29,7 +29,20 @@ $('#comment-btn').click(function(){
 	if(!comment){
 		return;
 	}
-	var html = '<div class="comment">' + comment + '</div>';
-	$('#comments-container').append(html);
-	$('#comment-input').val('');
+	
+	$.ajax({
+		url: window.location
+		, method: 'POST'
+		, contentType: 'application/json'
+		, data: JSON.stringify({
+			comment: comment
+			, parent: parseInt($('#msg-container').data('msgid'))
+			, username: user
+		})
+	}).done(function(){
+		var html = '<div class="comment">' + comment + '</div>';
+		$('#comments-container').append(html);
+		$('#comment-input').val('');
+	});
+	
 });

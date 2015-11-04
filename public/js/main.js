@@ -9,7 +9,7 @@
 //   	}		
 // });
 
-var user = "anthony";
+var user = "anatoli";
 
 $(".nav-link").click( function(){
    $(".nav").find(".active").removeClass("active");

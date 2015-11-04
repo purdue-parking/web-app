@@ -111,19 +111,47 @@ router.get('/map', function(req, res){
 });
 
 router.get('/messages', function(req, res){
-	var temp = testMessages; //deleteSpaces(testMessages.testMsgs);
-	// testMessages.testMsgs[0].message = testMessages.testMsgs[0].message.replace(/\s/g, '_');
-	res.render( 'message-board', temp);
+	request({
+		url: url_base + 'messagecollection/1'
+		, method: 'GET'
+	},
+	function(error, response, body){
+		if(error){
+			res.send(error);
+		}
+		res.render( 'message-board', JSON.parse(body) );
+	});
 });
 
 router.get('/messages/:id', function(req, res){
-	console.log(req.query.message);
-	var response = {
+	var id = req.params.id;
+	var finalResponse = {
 		message: req.query.message
-		, comments : [ {comment: 'This is a comment'}, {comment: 'This is another comment'}, {comment:'This is a third comment'}, {comment: 'A 4th'}]
+		, messageID: id
+		, comments : []
 		, votes: req.query.votes
 	}
-	res.render('message', response);
+	request({
+		url: url_base + 'commentcollection/' + id
+		, method: 'GET'
+	},
+	function(error, response, body){
+		finalResponse.comments = JSON.parse(body).items;
+		res.render('message', finalResponse);
+	});
+});
+
+router.post('/messages/:id', jsonParser, function(req, res){
+	console.log(req.body);
+	request({
+		url: url_base + 'addComment'
+		, method: 'POST'
+		, json: req.body
+	},
+	function(error, response, body){
+		// console.log(JSON.parse(body));
+		res.sendStatus(200);
+	});
 });
 
 router.get('/vehicles', function(req, res){
@@ -192,23 +220,6 @@ router.delete('/vehicles', jsonParser, function(req, res){
 		}
 	});
 });
-
-function deleteSpaces( arr ) {
-	var x = 0;
-	var tempObj = {};
-	var sendableMsgs = { testMsgs: [] };
-	arr.forEach(function(msg){
-		replacedMsg = msg.message.replace(/\s/g, '_');
-		tempObj = msg;
-		tempObj.message = replacedMsg;
-		sendableMsgs.testMsgs.push( tempObj );
-	});
-	return sendableMsgs;
-}
-
-function insertSpaces( str ) {
-	return str.replace(/_/g, ' ');
-}
 
 var tempUser = {
 	username: 'anatoli',
