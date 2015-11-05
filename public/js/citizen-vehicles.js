@@ -24,7 +24,7 @@ $('.save-car').click(function(){
 	// console.log("car id is ", car.data('carid'))
 	$.ajax({
 		url: window.location
-		, method: 'POST'
+		, method: 'PUT'
 		, dataType: 'json'
 		, contentType: 'application/json'
 		, data: JSON.stringify({
@@ -32,7 +32,7 @@ $('.save-car').click(function(){
 			, color: car.find('.color-field').val()
 			, make: car.find('.make-field').val()
 			, model: car.find('.model-field').val()
-			, owner: car.data('owner')
+			, username: car.data('owner')
 			, plateNumber: car.find('.plate-field').val()
 			, plateState: car.find('.state-field').val()
 			, year: car.find('.year-field').val()
