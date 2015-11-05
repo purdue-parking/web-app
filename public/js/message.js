@@ -7,9 +7,20 @@ $('#upBtn').click(function(){
 	else{
 		voteCount++;
 	}
-	$('#upBtn').prop('disabled', true);
-	$('#downBtn').prop('disabled', false);
-	$('#voteCount').html(voteCount);
+
+	$.ajax({
+		url: window.location.href.split('?')[0] + '/vote'
+		, method: 'PUT'
+		, contentType: 'application/json'
+		, data: JSON.stringify({
+			upvote: true
+		})
+	}).done(function(data, textStatus, jqXHR){
+		$('#upBtn').prop('disabled', true);
+		$('#downBtn').prop('disabled', false);
+		$('#voteCount').html(data.votes);
+	});
+	
 });
 
 $('#downBtn').click(function(){
@@ -19,9 +30,20 @@ $('#downBtn').click(function(){
 	else{
 		voteCount--;
 	}
-	$('#downBtn').prop('disabled', true);
-	$('#upBtn').prop('disabled', false);
-	$('#voteCount').html(voteCount);
+
+	$.ajax({
+		url: window.location.href.split('?')[0] + '/vote'
+		, method: 'PUT'
+		, contentType: 'application/json'
+		, data: JSON.stringify({
+			upvote: false
+		})
+	}).done(function(data, textStatus, jqXHR){
+		$('#downBtn').prop('disabled', true);
+		$('#upBtn').prop('disabled', false);
+		$('#voteCount').html(data.votes);
+	});
+	
 });
 
 $('#comment-btn').click(function(){
@@ -40,7 +62,7 @@ $('#comment-btn').click(function(){
 			, username: user
 		})
 	}).done(function(){
-		var html = '<div class="comment">' + comment + '</div>';
+		var html = '<div class="comment">' + comment + '</div><h4>-----------------------------------</h4>';
 		$('#comments-container').append(html);
 		$('#comment-input').val('');
 	});

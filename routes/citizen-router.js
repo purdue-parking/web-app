@@ -50,7 +50,7 @@ router.get('/account', function(req, res){
 		else{
 			//console.log('GET account response:', JSON.parse(body).properties);
 			// console.log(JSON.parse(body).properties);
-			console.log(JSON.parse(body).properties);
+			// console.log(JSON.parse(body).properties);
 			res.render( 'citizen-account', JSON.parse(body).properties );
 		}
 	});
@@ -101,7 +101,7 @@ router.get('/tickets', function(req, res){
 			res.send(error);
 		}
 		else{
-			console.log(body);
+			// console.log(body);
 			res.render( 'citizen-tickets', JSON.parse(body) );
 		}
 		
@@ -125,6 +125,56 @@ router.get('/messages', function(req, res){
 	});
 });
 
+router.post('/messages', jsonParser, function(req, res){
+	//console.log("POST to /messages");
+	//console.log(req.body);
+	request({
+		url: url_base + 'addMessage'
+		, method: 'POST'
+		, json: req.body
+	},
+	function(error, response, body){
+		if(error){
+			res.sendStatus(400);
+		}
+		else{
+			console.log(body.properties);
+			res.send(body.properties);
+		}
+		
+	});
+});
+
+router.get('/messages/sortHelp', function(req, res){
+	request({
+		url: url_base + 'messagecollection/1'
+		, method: 'POST'
+	},
+	function(error, response, body){
+		if(error){
+			// console.log('error');
+			res.send(error);
+		}
+		// console.log(JSON.parse(body));
+		res.render( 'message-board', JSON.parse(body) );
+	});
+});
+
+router.get('/messages/sortVotes', function(req, res){
+	request({
+		url: url_base + 'messagecollection/1/true'
+		, method: 'PUT'
+	},
+	function(error, response, body){
+		if(error){
+			// console.log('error');
+			res.send(error);
+		}
+		// console.log(JSON.parse(body));
+		res.render( 'message-board', JSON.parse(body) );
+	});
+});
+
 router.get('/messages/:id', function(req, res){
 	var id = req.params.id;
 	var finalResponse = {
@@ -144,7 +194,6 @@ router.get('/messages/:id', function(req, res){
 });
 
 router.post('/messages/:id', jsonParser, function(req, res){
-	console.log(req.body);
 	request({
 		url: url_base + 'addComment'
 		, method: 'POST'
@@ -153,6 +202,23 @@ router.post('/messages/:id', jsonParser, function(req, res){
 	function(error, response, body){
 		// console.log(JSON.parse(body));
 		res.sendStatus(200);
+	});
+});
+
+router.put('/messages/:id/vote', jsonParser, function(req, res){
+	// console.log(req.body);
+	var req_params = {
+		url: url_base + 'upvote/' + req.params.id
+		, method: 'POST'
+	}
+
+	if(!req.body.upvote){
+		req_params.url = url_base + 'downvote/' + req.params.id;
+	}
+
+	request(req_params, function(error, response, body){
+		console.log(JSON.parse(body));
+		res.send(JSON.parse(body).properties);
 	});
 });
 
@@ -168,7 +234,7 @@ router.get('/vehicles', function(req, res){
 		else{
 			res.status(200);
 			//res.send(body);
-			console.log(JSON.parse(body));
+			// console.log(JSON.parse(body));
 			res.render( 'citizen-vehicles', JSON.parse(body) );
 		}
 	});
@@ -176,7 +242,7 @@ router.get('/vehicles', function(req, res){
 })
 
 router.post('/vehicles', jsonParser, function(req, res){
-	console.log('Post to /citizens/vehicles');
+	// console.log('Post to /citizens/vehicles');
 	request({
 		url: url_base + 'addVehicle?alt=json',
 		method: 'POST',
