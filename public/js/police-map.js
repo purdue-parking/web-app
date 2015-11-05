@@ -140,6 +140,19 @@ $('#saveImageButton').click(function(){
 	console.log(dataURL);
 	document.getElementById("canvasImg").src = dataURL;
 	document.getElementById("canvasImg").style.display = "inline";
+
+	console.log(cloudinary_name);
+	console.log(cloudinary_key);
+	console.log(cloudinary_secret);
+
+	$.cloudinary.config({
+		cloud_name: cloudinary_name, 
+		api_key: cloudinary_key
+	});
+
+	$('.upload_form').append($.cloudinary.unsigned_upload_tag("image", {
+		cloud_name: cloudinary_name
+	}));
 });
 
 

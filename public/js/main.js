@@ -10,6 +10,20 @@
 // });
 
 var user = "anatoli";
+var cloudinary_name;
+var cloudinary_key;
+var cloudinary_secret;
+
+$.ajax({
+	url: location.origin + "/env",
+	method: 'GET'
+}).done(function(data){
+	cloudinary_name = data.cloudinary_name;
+	cloudinary_key = data.cloudinary_key;
+	cloudinary_secret = data.cloudinary_secret;
+
+	console.log(cloudinary_name);
+})
 
 $(".nav-link").click( function(){
    $(".nav").find(".active").removeClass("active");
