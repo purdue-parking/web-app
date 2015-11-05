@@ -16,14 +16,15 @@
 		</tr>
 	</thead>
 	<tbody id="ticketTable">
-		{{#each items}}
+		{{#each ticket}}
 			<tr>
-				<td>{{ticketNumber}}</td>
+				<td>{{ticket_number}}</td>
 				<td>{{time}}</td>
 				<td>{{date}}</td>
-				<td>{{plateNumber}}</td>
-				<td>{{plateState}}</td>
-				<td>{{reason}}</td>
+				<td>{{parking_pass}}</td>
+				<td>{{license_plate}}</td>
+				<td>{{state}}</td>
+				<td>{{comments}}</td>
 				<td><button type="button" class="btn btn-primary edit-ticket">Edit</button></td>
 			</tr>
 		{{/each}}
@@ -56,5 +57,5 @@
   	</div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<script src="/public/js/police-tickets.js"></script>
+<script src="/public/js/tow-tickets.js"></script>
 

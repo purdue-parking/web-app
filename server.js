@@ -4,6 +4,9 @@ var exhbs = require( 'express3-handlebars' );
 
 var citizenRouter = require( './routes/citizen-router' );
 var policeRouter = require( './routes/police-router' );
+var towRouter = require('./routes/tow-router');
+
+require('dotenv').load();
 
 var app = express();
 
@@ -19,9 +22,19 @@ app.get( '/', function( req, res ){
 	res.render( 'login' );
 });
 
+app.get( '/env', function(req, res){
+	res.send({
+		cloudinary_name: process.env.CLOUDINARY_CLOUD_NAME,
+		cloudinary_key: process.env.CLOUDINARY_KEY,
+		cloudinary_secret: process.env.CLOUDINARY_SECRET
+	});
+})
+
 app.use( '/citizen', citizenRouter );	//use router for all routes under /router/*
 
 app.use( '/police', policeRouter );
+
+app.use('/tow', towRouter);
 
 server.listen(process.env.PORT || port, function(){
   console.log('listening on *:3000');
