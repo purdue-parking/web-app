@@ -39,7 +39,6 @@ function newRow(ticketNumber, ticketDate, ticketTime, ticketParkingPass, ticketL
 					+ '<td>' + ticketNumber + '</td>'
 					+ '<td>' + ticketTime + '</td>'
 					+ '<td>' + ticketDate + '</td>'
-					+ '<td>' + ticketParkingPass + '</td>'
 					+ '<td>' + ticketLicensePlate + '</td>'
 					+ '<td>' + ticketState + '</td>'
 					+ '<td>' + ticketComments + '</td>'
