@@ -4,7 +4,8 @@ var exhbs = require( 'express3-handlebars' );
 
 var citizenRouter = require( './routes/citizen-router' );
 var policeRouter = require( './routes/police-router' );
-var towRouter = require('./routes/tow-router');
+var towRouter = require( './routes/tow-router' );
+var pictureRouter = require( './routes/picture-router' );
 
 require('dotenv').load();
 
@@ -34,7 +35,13 @@ app.use( '/citizen', citizenRouter );	//use router for all routes under /router/
 
 app.use( '/police', policeRouter );
 
-app.use('/tow', towRouter);
+app.use( '/tow', towRouter );
+
+// app.get( '/picture', function(req, res){
+// 	res.send('hi');
+// });
+
+app.use( '/picture', pictureRouter );
 
 server.listen(process.env.PORT || port, function(){
   console.log('listening on *:3000');
