@@ -37,10 +37,6 @@ app.use( '/police', policeRouter );
 
 app.use( '/tow', towRouter );
 
-// app.get( '/picture', function(req, res){
-// 	res.send('hi');
-// });
-
 app.use( '/picture', pictureRouter );
 
 server.listen(process.env.PORT || port, function(){
