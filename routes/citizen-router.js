@@ -2,6 +2,7 @@ var express = require('express');
 var request = require('request');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
+var mapInfo = require('../pic_data.js');
 
 require('dotenv').load();
 
@@ -11,26 +12,6 @@ var jsonParser = bodyParser.json();
 var url_base = 'https://purdue-parking.appspot.com/_ah/api/purdueParking/1/'
 
 router.get('/', function(req, res){
-	// request({
-	// 		url: url_base + 'createTicket?alt=json',
-	// 		method: 'POST',
-	// 		json: {
-	// 			'ticketNum': 1234,
-	// 			'plateNum': '123ABC',
-	// 			'plateState': 'Indiana',
-	// 			'time': '1:23 pm',
-	// 			'date': 'August 8, 2014',
-	// 			'reason': 'You parked like a dick',
-	// 			'towAddress': null
-	// 		}
-	// 	},
-	// 	function(error, response, body){
-	// 		if( error )
-	// 			console.log("ERROR: ", error);
-	// 		console.log(body);
-	// 		res.render( 'citizen-home', body );
-	// 	}
-	// );
 	res.render( 'citizen-home' );
 });
 
@@ -109,8 +90,24 @@ router.get('/tickets', function(req, res){
 });
 
 router.get('/map', function(req, res){
-	res.render( 'map' );
+	// console.log(mapInfo);
+	var extension = {
+		helpers: {
+			getWidth: getWidth
+			, getHeight: getHeight
+		}
+	}
+	var data = _.extend(mapInfo, extension);
+	res.render( 'citizen-map', data );
 });
+
+function getWidth(topLeft, bottomRight){
+	return bottomRight[0] - topLeft[0];
+}
+
+function getHeight(topLeft, bottomRight){
+	return (topLeft[1] - bottomRight[1]) * -1;
+}
 
 router.get('/messages', function(req, res){
 	request({
