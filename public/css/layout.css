@@ -23,6 +23,17 @@ body {
 	text-align: center;
 }
 
+.parking-info {
+	float: left;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+#map-container {
+	position: relative;
+}
+
 .message-field {
 	width: 80%;
 }
