@@ -109,6 +109,15 @@ function getHeight(topLeft, bottomRight){
 	return (topLeft[1] - bottomRight[1]) * -1;
 }
 
+function formatDate(dateStr){
+	if( dateStr ){
+		var date = new Date(dateStr);
+		return date.toLocaleString();
+	}
+	else
+		return '';
+}
+
 router.get('/messages', function(req, res){
 	request({
 		url: url_base + 'messagecollection/1'
@@ -118,7 +127,12 @@ router.get('/messages', function(req, res){
 		if(error){
 			res.send(error);
 		}
-		res.render( 'message-board', JSON.parse(body) );
+		var extension = {
+			helpers: {
+				formatDate: formatDate
+			}
+		}
+		res.render( 'message-board', _.extend(JSON.parse(body), extension) );
 	});
 });
 
