@@ -29,4 +29,27 @@
 	</table>
 </div>
 
+<div class="modal fade" id="addVehicleModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add a Vehicle</h4>
+      </div>
+      <div class="modal-body">
+			<div>Make: <input type="text" id="newMake"></input></div>
+			<div>Model: <input type="text" id="newModel"></input></div>
+			<div>Year: <input type="text" id="newYear"></input></div>
+			<div>Color: <input type="text" id="newColor"></input></div>
+			<div>License Plate Number: <input type="text" id="newPlate"></input></div>
+			<div>State: <input type="text" id="newState"></input></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="saveNewVehicle">Save</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <script src="/public/js/citizen-vehicles.js"></script>

@@ -2,7 +2,7 @@
 
 <div id="map-container">
 {{#each parking}}
-	<div id="{{pid}}" class="parking-info" data-toggle="popover" data-trigger="hover" data-content="{{timeRestrictions}}" title="{{parkingPasses}}" style="background-color: none; left: {{top_left.[0]}}px; top: {{top_left.[1]}}px; width: {{getWidth top_left bottom_right}}px; height: {{getHeight top_left bottom_right}}px;"></div>
+	<div id="{{pid}}" class="parking-info" data-toggle="popover" data-trigger="hover" data-content="{{timeRestrictions}}" title="Parking Passes: {{parkingPasses}}" style="background-color: none; left: {{top_left.[0]}}px; top: {{top_left.[1]}}px; width: {{getWidth top_left bottom_right}}px; height: {{getHeight top_left bottom_right}}px;"></div>
 {{/each}}
 <img id="map-img" src="/public/images/purdue_campus_map.jpg">
 
