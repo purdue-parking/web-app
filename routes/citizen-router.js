@@ -273,9 +273,8 @@ router.put('/vehicles', jsonParser, function(req, res){
 
 router.delete('/vehicles', jsonParser, function(req, res){
 	request({
-		url: url_base + 'deleteVehicle?alt=json',
-		method: 'DELETE',
-		json: req.body
+		url: url_base + 'vehicle/' + req.body.carID,
+		method: 'DELETE'
 	},
 	function(error, response, body){
 		if(error)

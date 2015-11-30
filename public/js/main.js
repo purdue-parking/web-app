@@ -22,7 +22,7 @@ $.ajax({
 	cloudinary_key = data.cloudinary_key;
 	cloudinary_secret = data.cloudinary_secret;
 
-	console.log(cloudinary_name);
+	// console.log(cloudinary_name);
 })
 
 $(".nav-link").click( function(){

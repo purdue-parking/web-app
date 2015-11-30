@@ -13,7 +13,7 @@ $('.delete-car').click(function(){
 		, data: JSON.stringify({
 			carID: carId
 		})
-	}).done(function(){
+	}).always(function(){
 		row.remove();
 	});
 });
@@ -43,7 +43,35 @@ $('.save-car').click(function(){
 });
 
 $('#add-car').click(function(){
-	$('#car-table-body').append(newRow());
+	console.log('click registered');
+	$('#addVehicleModal').modal('show');
+});
+
+$('#saveNewVehicle').click(function(){
+	var make = $('#newMake').val();
+	var model = $('#newModel').val();
+	var year = $('#newYear').val();
+	var color = $('#newColor').val();
+	var plate = $('#newPlate').val();
+	var state = $('#newState').val();
+
+	$.ajax({
+		url: window.location
+		, method: 'POST'
+		, dataType: 'json'
+		, contentType: 'application/json'
+		, data: JSON.stringify({
+			make: make
+			, model: model
+			, year: year
+			, color: color
+			, plateNumber: plate
+			, plateState: state
+			, username: user
+		})
+	}).done(function(){
+		window.location = location.origin + '/citizen/vehicles?username=' + user;
+	})
 });
 
 
