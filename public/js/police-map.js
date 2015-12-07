@@ -41,6 +41,20 @@ function prepareCanvas(){
 	topMap.src = "/public/images/purdue_campus_map.jpg";
 }
 
+/*function upload(e){
+	var reader = new FileReader();
+	reader.onload = function(event){
+		var img = new Image();
+		img.onload = function(){
+			canvas.width = img.width;
+			canvas.height = img.height;
+			ctx.drawImage(img, 0, 0);
+		}
+		img.src = event.target.result;
+	}
+	reader.readAsDataURL(e.target.files[0])
+}*/
+
 function color(obj){
 	switch(obj.id){
 		case "green":
@@ -141,7 +155,20 @@ $('#saveImageButton').click(function(){
 	document.getElementById("canvasImg").src = dataURL;
 	document.getElementById("canvasImg").style.display = "inline";
 
-	console.log(cloudinary_name);
+	$.ajax({
+		url: window.location,
+		method: 'POST',
+		contentType: 'application/json',
+		data: JSON.stringify({
+			image: canvasImg,
+			name: imageName
+		}),
+		success: function(respose){
+			console.log(response);
+		}
+	})
+
+	/*console.log(cloudinary_name);
 	console.log(cloudinary_key);
 	console.log(cloudinary_secret);
 
@@ -152,7 +179,7 @@ $('#saveImageButton').click(function(){
 
 	$('.upload_form').append($.cloudinary.unsigned_upload_tag("image", {
 		cloud_name: cloudinary_name
-	}));
+	}));*/
 });
 
 

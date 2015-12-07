@@ -1,0 +1,49 @@
+<!-- Express and Express Handlebars, Handlebars.js-->
+
+<h2>Events</h2>
+
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Date</th>
+			<th>Event Name</th>
+			<th>Event Description</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody id="eventTable">
+		{{#each items}}
+			<tr>
+				<td>{{date}}</td>
+				<td>{{eventName}}</td>
+				<td>{{eventDescription}}</td>
+				<td><button type="button" class="btn btn-primary edit-event">Edit</button></td>
+			</tr>
+		{{/each}}
+	</tbody>
+</table>
+
+<button class="btn btn-primary" id="createBtn">New Event</button>
+
+<div class="modal fade" id="myModal">
+  	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title">Create an Event</h4>
+      		</div>
+      		<div class="modal-body">
+      			<h4>Date:</h4><input type="date" class="new-event-field" id="new-event-date"></input>
+      	 		<h4>Name:</h4><input type="text" class="new-event-field" id="new-event-name"></input>
+      	 		<h4>Description:</h4><textarea class="new-event-field" id="new-event-description"></textarea>
+     		</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+       			<button type="button" class="btn btn-primary" data-dismiss="modal" id="newEventButton">Create Event</button>
+      		</div>
+    	</div><!-- /.modal-content -->
+  	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="/public/js/police-special.js"></script>
+

@@ -1,9 +1,12 @@
 <div id="wrapper">
 	<div id="canvasContainer" width="580" height="750">
 		<canvas id="mapCanvas" width="580" height = "750"></canvas>
-		<img id="canvasImg">
-		<!--<input id="uploadinput" class="cloudinary-fileupload" data-cloudinary-field="canvasImg"
-			data-form-data = ""></input>-->
+		<div hidden>
+			<img id="canvasImg" alt="Right Click to Save Me" display="none">
+		</div>
+		<!--<input type="file" id="uploadimage" onclick="upload(this)">Upload</input>-->
+		<input name="file" type="file" id="uploadImage" class="cloudinary-fileupload" data-cloudinary-field="canvasImg"
+			data-form-data = ""></input>
 	</div>
 
 	<div id="buttonContainer">
@@ -63,6 +66,11 @@
 	$(document).ready(function() {
 		prepareCanvas();
 	});
+
+	$.cloudinary.config({
+		"api_key": process.env.CLOUDINARY_KEY;
+		"cloud_name": process.env.CLOUDINARY_CLOUD_NAME;
+	})
 </script>
 
 <script src="/public/js/police-map.js"></script>

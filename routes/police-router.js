@@ -2,6 +2,7 @@ var express = require('express');
 var request = require('request');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
+var cloudinary = require('cloudinary');
 var router = express.Router();
 
 var jsonParser = bodyParser.json();
@@ -12,14 +13,8 @@ router.get('/', function(req, res){
   res.render( 'police-home', {layout: 'police-layout'} ); 		
 });
 
-router.get('/account', function(req, res){
-	var accountData={
-	account:[
-		{name: "Denver Kirschling", username: "dkirschl", account_type: "Police Officer"}	
-	],
-	layout: 'police-layout'
-	}
-	res.render( 'police-account', accountData );
+router.get('/special', function(req, res){
+	res.render( 'police-special', {layout: 'police-layout'} );
 });
 
 router.get('/tickets', function(req, res){
@@ -63,5 +58,19 @@ router.post('/tickets', jsonParser, function(req, res){
 router.get('/map', function(req, res){
 	res.render( 'police-map', {layout: 'police-layout'} );
 });
+
+router.post('/map', jsonParser, function(req, res){
+	console.log(req.body);
+	/*
+	cloudinary.config({
+		cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+		api_key: process.env.CLOUDINARY_KEY,
+		api_secret: process.env.CLOUDINARY_SECRET
+	})
+
+	cloudinary.uploader.upload(image, function(result){
+		console.log(result);*/
+});
+
 
 module.exports = router;
