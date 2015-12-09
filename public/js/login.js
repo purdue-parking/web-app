@@ -3,7 +3,7 @@ $('#login-btn').click(function(){
 	var pass = $('#password-field').val();
 
 	$.ajax({
-		url: window.location + '/login'
+		url: window.location + 'login'
 		, method: 'POST'
 		, contentType: 'application/json'
 		, data: JSON.stringify({
@@ -12,10 +12,11 @@ $('#login-btn').click(function(){
 		})
 	}).done(function( acctInfo ){
 		user = acctInfo.username;
-		window.location = window.location + '/citizen/messages?username=' + user;
-	});
+		var transfer = window.location + 'citizen/messages?username=' + user;
+		window.location = transfer;
+	});		 
 });
 
 $('#signup-btn').click(function(){
-	window.location = window.location + 'login/register';
+	window.location = location.origin + 'login/register';
 });
