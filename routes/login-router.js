@@ -13,8 +13,21 @@ var url_base = 'https://purdue-parking.appspot.com/_ah/api/purdueParking/1/'
 router.post('/', jsonParser, function(req, res){
 	var user = req.body.username;
 	var pass = req.body.password;
-
-
+	console.log('login attempt: ' + user + ' ' + pass);
+	request({
+		url: url_base + 'login/' + user + '/' + pass
+		, method: 'GET'
+	},
+	function(error, response, body){
+		if(error){
+			res.status(400);
+			res.send(error);
+		}
+		else{
+			console.log(JSON.parse(body).properties);
+			res.send(JSON.parse(body).properties);
+		}
+	});
 });
 
 router.get('/register', function(req, res){
