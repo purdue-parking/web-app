@@ -120,7 +120,7 @@ function formatDate(dateStr){
 
 router.get('/messages', function(req, res){
 	request({
-		url: url_base + 'messagecollection/1'
+		url: url_base + 'usermessagecollection/1'
 		, method: 'GET'
 	},
 	function(error, response, body){
@@ -158,7 +158,7 @@ router.post('/messages', jsonParser, function(req, res){
 
 router.get('/messages/sortHelp', function(req, res){
 	request({
-		url: url_base + 'messagecollection/1'
+		url: url_base + 'usermessagecollection/1'
 		, method: 'POST'
 	},
 	function(error, response, body){
@@ -173,7 +173,7 @@ router.get('/messages/sortHelp', function(req, res){
 
 router.get('/messages/sortVotes', function(req, res){
 	request({
-		url: url_base + 'messagecollection/1/true'
+		url: url_base + 'usermessagecollection/1/true'
 		, method: 'PUT'
 	},
 	function(error, response, body){

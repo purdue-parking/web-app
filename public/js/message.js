@@ -1,3 +1,13 @@
+// queryParams = window.location.search.substr(1).split('&');
+
+// for (pairNum in queryParams) {
+//       var param = queryParams[pairNum].split('=');
+//       if( param[0] == 'username'){
+//       	user = param[1];
+//       }
+// }
+// console.log(user);
+
 var voteCount = parseInt($('#voteCount').html());;
 
 $('#upBtn').click(function(){
