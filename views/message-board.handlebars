@@ -12,7 +12,8 @@
 			{{#each items}}
 				<tr class="message-row" id="{{messageID}}">
 					<!--td><input type="text" class="table-input message-field" disabled value={{message}}></input></td-->
-					<td class="message-field">{{{message}}}</td>
+					<td class="message-field"><div class="message-text">{{{message}}}</div>
+											<div class="message-author">Added by: {{{username}}}  {{formatDate timePosted}}</div></td>
 					<td class="table-help-needed">
 						{{#if helpNeeded}}
 							<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span><br>

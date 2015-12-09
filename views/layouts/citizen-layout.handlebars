@@ -8,6 +8,7 @@
 	<script src="/bower_components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="/bower_components/handlebars/handlebars.min.js" type="text/javascript"></script>
 	<script src="/public/js/main.js" type="text/javascript"></script>
+	<script src="/public/js/citizen-main.js" type="text/javascript"></script>
 	<script src="https://apis.google.com/js/client.js?onload=init"></script>
 	
 </head>
@@ -15,11 +16,11 @@
 	<h1 class="title">Purdue Parking Assistant</h1>
 	<div id="nav-container">
 		<ul class="nav nav-pills nav-stacked">
-			<li role="presentation" class="active"><a class="nav-link" href="/citizen/messages">Message Board</a></li>
-			<li role="presentation"><a class="nav-link" href="/citizen/account?username=anatoli">Account</a></li>
-			<li role="presentation"><a href="/citizen/vehicles?username=anatoli">Vehicles</a></li>
-			<li role="presentation"><a href="/citizen/tickets?username=anatoli">Tickets</a></li>
-			<li role="presentation"><a href="/citizen/map">Map</a></li>
+			<li role="presentation" class="active"><a id="messages-link" class="nav-link" href="/citizen/messages">Message Board</a></li>
+			<li role="presentation"><a id="account-link" class="nav-link" href="/citizen/account">Account</a></li>
+			<li role="presentation"><a id="vehicles-link" href="/citizen/vehicles">Vehicles</a></li>
+			<li role="presentation"><a id="tickets-link" href="/citizen/tickets">Tickets</a></li>
+			<li role="presentation"><a id="map-link" href="/citizen/map">Map</a></li>
 		</ul>
 	</div>
 

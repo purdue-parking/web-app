@@ -1,10 +1,18 @@
-console.log(user);
+// queryParams = window.location.search.substr(1).split('&');
+
+// for (pairNum in queryParams) {
+//       var param = queryParams[pairNum].split('=');
+//       if( param[0] == 'username'){
+//       	user = param[1];
+//       }
+// }
+// console.log(user);
 
 $('.message-field').click(function(){
 	var row = $(this).closest('tr');
 	var msgID = row.attr('id');
 
-	window.location = window.location + '/' + msgID + '?message=' + $(this).html() + '&votes=' + row.find('#voteCount').html();
+	window.location = location.origin + '/citizen/messages' + '/' + msgID + '?username=' + user + '&message=' + $(this).find('.message-text').html() + '&votes=' + row.find('#voteCount').html();
 });
 
 $('#sortHelp').click(function(){

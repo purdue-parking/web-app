@@ -2,6 +2,7 @@ var express = require('express');
 var http = require('http');
 var exhbs = require( 'express3-handlebars' );
 
+var loginRouter = require( './routes/login-router' );
 var citizenRouter = require( './routes/citizen-router' );
 var policeRouter = require( './routes/police-router' );
 var towRouter = require( './routes/tow-router' );
@@ -20,7 +21,7 @@ app.set( 'view engine', 'handlebars' );
 app.use( express.static( __dirname ) );
 
 app.get( '/', function( req, res ){
-	res.render( 'login' );
+	res.render( 'login', {layout: 'prelogin-layout'} );
 });
 
 app.get( '/env', function(req, res){
@@ -30,6 +31,8 @@ app.get( '/env', function(req, res){
 		cloudinary_secret: process.env.CLOUDINARY_SECRET
 	});
 })
+
+app.use( '/login', loginRouter );
 
 app.use( '/citizen', citizenRouter );	//use router for all routes under /router/*
 

@@ -109,16 +109,30 @@ function getHeight(topLeft, bottomRight){
 	return (topLeft[1] - bottomRight[1]) * -1;
 }
 
+function formatDate(dateStr){
+	if( dateStr ){
+		var date = new Date(dateStr);
+		return date.toLocaleString();
+	}
+	else
+		return '';
+}
+
 router.get('/messages', function(req, res){
 	request({
-		url: url_base + 'messagecollection/1'
+		url: url_base + 'usermessagecollection/1'
 		, method: 'GET'
 	},
 	function(error, response, body){
 		if(error){
 			res.send(error);
 		}
-		res.render( 'message-board', JSON.parse(body) );
+		var extension = {
+			helpers: {
+				formatDate: formatDate
+			}
+		}
+		res.render( 'message-board', _.extend(JSON.parse(body), extension) );
 	});
 });
 
@@ -144,7 +158,7 @@ router.post('/messages', jsonParser, function(req, res){
 
 router.get('/messages/sortHelp', function(req, res){
 	request({
-		url: url_base + 'messagecollection/1'
+		url: url_base + 'usermessagecollection/1'
 		, method: 'POST'
 	},
 	function(error, response, body){
@@ -159,7 +173,7 @@ router.get('/messages/sortHelp', function(req, res){
 
 router.get('/messages/sortVotes', function(req, res){
 	request({
-		url: url_base + 'messagecollection/1/true'
+		url: url_base + 'usermessagecollection/1/true'
 		, method: 'PUT'
 	},
 	function(error, response, body){

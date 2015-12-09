@@ -9,10 +9,22 @@
 //   	}		
 // });
 
-var user = "anatoli";
+var user;
 var cloudinary_name;
 var cloudinary_key;
 var cloudinary_secret;
+
+
+//set user variable
+queryParams = window.location.search.substr(1).split('&');
+
+for (pairNum in queryParams) {
+      var param = queryParams[pairNum].split('=');
+      if( param[0] == 'username'){
+      	user = param[1];
+      }
+}
+console.log(user);
 
 $.ajax({
 	url: location.origin + "/env",
@@ -23,9 +35,9 @@ $.ajax({
 	cloudinary_secret = data.cloudinary_secret;
 
 	// console.log(cloudinary_name);
-})
+});
 
-$(".nav-link").click( function(){
+$(".nav-link").on('click', function(){
    $(".nav").find(".active").removeClass("active");
    $(this).parent().addClass("active");
 });
