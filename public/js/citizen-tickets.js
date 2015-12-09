@@ -5,3 +5,9 @@ $('.pay-btn').click(function(){
 $('.appeal-btn').click(function(){
 	window.location = 'https://www.purdue.edu/pat/forms/appealform.php';
 })
+
+$('.tow-btn').click(function(){
+	var address = $(this).data('coords');
+	var win = window.open('http://maps.google.com/?q=' + address, '_blank');
+ 	win.focus();
+});
