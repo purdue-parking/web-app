@@ -13,12 +13,16 @@
 		<tbody>
 			{{#each items}}
 				<tr>
-					<td>{{{date}}}</td>
-					<td class=".ticket-num">{{ticketNum}}</td>
-					<td>{{plateNum}}</td>
+					<td>{{{date}}} {{time}}</td>
+					<td class="ticket-num">{{ticketNumber}}</td>
+					<td>{{plateState}} {{plateNumber}}</td>
 					<td>{{{reason}}}</td>
 					<td><button type="button" class="btn btn-primary pay-btn">Pay</button>
-						<button type="button" class="btn btn-primary appeal-btn">Appeal</td>
+						<button type="button" class="btn btn-primary appeal-btn">Appeal</button>
+						{{#if towAddress}}
+							<button type="button" class="btn btn-primary tow-btn" data-coords="{{{towAddress}}}">Tow</button>
+						{{/if}}
+					</td>
 				</tr>
 			{{/each}}
 		</tbody>
