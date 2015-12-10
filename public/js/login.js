@@ -12,7 +12,16 @@ $('#login-btn').click(function(){
 		})
 	}).done(function( acctInfo ){
 		user = acctInfo.username;
-		var transfer = window.location + 'citizen/messages?username=' + user;
+		var transfer;
+		if(acctInfo.accountType === "CITIZEN"){
+			transfer = window.location + 'citizen/messages?username=' + user;
+		}
+		else if(acctInfo.accountType === "POLICE"){
+			transfer = window.location + 'police/tickets';
+		}
+		else{
+			transfer = window.location + 'tow';
+		}
 		window.location = transfer;
 	});		 
 });
