@@ -15,6 +15,7 @@ $('#newTicketBtn').click(function(){
 	var ticketLicensePlate = $('#new-ticket-license-plate').val();
 	var ticketState = $('#new-ticket-state').val();
 	var ticketComments = $('#new-ticket-comments').val();
+	var ticketTowAddress = $('#new-ticket-tow-address').val();
 
 	$.ajax({
 		url: window.location
@@ -27,14 +28,14 @@ $('#newTicketBtn').click(function(){
 			time: ticketTime,
 			date: ticketDate,
 			reason: ticketComments,
-			towAddress: 'N/A'
+			towAddress: ticketTowAddress
 		})
 	});
 
-	$('#ticketTable').append(newRow(ticketNumber, ticketDate, ticketTime, ticketParkingPass, ticketLicensePlate, ticketState, ticketComments));
+	$('#ticketTable').append(newRow(ticketNumber, ticketDate, ticketTime, ticketLicensePlate, ticketState, ticketComments, ticketTowAddress));
 });
 
-function newRow(ticketNumber, ticketDate, ticketTime, ticketParkingPass, ticketLicensePlate, ticketState, ticketComments){
+function newRow(ticketNumber, ticketDate, ticketTime, ticketLicensePlate, ticketState, ticketComments, ticketTowAddress){
 	var newRow = '<tr>'
 					+ '<td>' + ticketNumber + '</td>'
 					+ '<td>' + ticketTime + '</td>'
@@ -42,6 +43,7 @@ function newRow(ticketNumber, ticketDate, ticketTime, ticketParkingPass, ticketL
 					+ '<td>' + ticketLicensePlate + '</td>'
 					+ '<td>' + ticketState + '</td>'
 					+ '<td>' + ticketComments + '</td>'
+					+ '<td>' + ticketTowAddress + '</td>'
 					+ '<td> <button type="button" class="btn btn-primary edit-ticket">Edit</button> </td>' + 
 				'</tr>';
 	return newRow;

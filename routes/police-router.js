@@ -122,7 +122,7 @@ router.put('/account', jsonParser, function(req, res){
 
 router.post('/tickets', jsonParser, function(req, res){
 	request({
-		url: url_base + 'addTicket?alt=json',
+		url: url_base + 'addTicket/' + req.query.username,
 		method: 'POST',
 		json: req.body
 	},
@@ -130,6 +130,7 @@ router.post('/tickets', jsonParser, function(req, res){
 	 	if( error )
 	 		console.log("ERROR: ", error);
 	 	else{
+	 		console.log(body);
 	 		res.status(200);
 	 		res.send(body);
 	 	}
