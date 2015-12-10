@@ -1,14 +1,3 @@
-// requirejs.config({
-// 	baseUrl: '/',
-// 	paths:{
-//     	'jquery': '/bower_components/jquery/dist/jquery.min',
-//     	'handlebars': '/bower_components/handlebars/handlebars',
-//     	'underscore': '/bower_components/underscore/underscore',
-//     	'home': 'public/js/home',
-//     	'route': 'public/js/route'
-//   	}		
-// });
-
 var user;
 var cloudinary_name;
 var cloudinary_key;
