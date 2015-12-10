@@ -101,6 +101,7 @@ router.get('/map', function(req, res){
 			helpers: {
 				getWidth: getWidth
 				, getHeight: getHeight
+				, getZindex: getZindex
 			}
 		}
 		var data = _.extend(JSON.parse(body), extension);
@@ -109,8 +110,13 @@ router.get('/map', function(req, res){
 	
 });
 
-function hasColor(color){
-	return color !== 'none';
+function getZindex(color){
+	if(color !== 'none'){
+		return 10;
+	}
+	else{
+		return 0;
+	}
 }
 
 function getWidth(topLeft, bottomRight){
