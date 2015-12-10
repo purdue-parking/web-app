@@ -72,9 +72,7 @@ $('#comment-btn').click(function(){
 			, username: user
 		})
 	}).done(function(){
-		var html = '<div class="comment">' + comment + '</div><h4>-----------------------------------</h4>';
-		$('#comments-container').append(html);
-		$('#comment-input').val('');
+		window.location = window.location;
 	});
 	
 });

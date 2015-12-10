@@ -1,0 +1,18 @@
+#nav-container {
+	width: 20%;
+	height: 100vh;
+	float: left;
+    background-color: #A09D9D;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+
+.title {
+	text-align: center;
+    margin-bottom: 0px;
+    margin-top: 0px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    height: 12vh;
+}
