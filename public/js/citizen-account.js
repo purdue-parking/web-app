@@ -24,7 +24,11 @@ $('#saveBtn').click(function(){
 			email: $('#email-field').val(),
 			phoneNumber: $('#phone-field').val(),
 			name: $('#name-field').val(),
-			accountType: $('#account-type-field').val()
+			password: $('#password-field').val(),
+			accountType: $('#account-type-field').val(),
+			ticketEmail: $('#ticket-email').prop('checked'),
+			helpEmail: $('#help-email').prop('checked'),
+			responseEmail: $('#response-email').prop('checked')
 		})
 	}).done(function(){
 
