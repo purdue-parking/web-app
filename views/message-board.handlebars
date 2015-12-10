@@ -10,7 +10,11 @@
 		</thead>
 		<tbody id="msg-table-body">
 			{{#each items}}
-				<tr class="message-row" id="{{messageID}}">
+				{{#if special}}
+					<tr class="message-row special-row" id="{{messageID}}">
+				{{else}}
+					<tr class="message-row" id="{{messageID}}">
+				{{/if}}
 					<!--td><input type="text" class="table-input message-field" disabled value={{message}}></input></td-->
 					<td class="message-field"><div class="message-text">{{{message}}}</div>
 											<div class="message-author">Added by: {{{username}}}  {{formatDate timePosted}}</div></td>
