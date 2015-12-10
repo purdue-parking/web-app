@@ -91,22 +91,34 @@ router.get('/tickets', function(req, res){
 
 router.get('/map', function(req, res){
 	// console.log(mapInfo);
-	var extension = {
-		helpers: {
-			getWidth: getWidth
-			, getHeight: getHeight
+	request({
+		url: url_base + 'lotinfocollection/',
+		method: 'GET'
+	},
+	function(error, response, body){
+		console.log(body);
+		var extension = {
+			helpers: {
+				getWidth: getWidth
+				, getHeight: getHeight
+			}
 		}
-	}
-	var data = _.extend(mapInfo, extension);
-	res.render( 'citizen-map', data );
+		var data = _.extend(JSON.parse(body), extension);
+		res.render( 'citizen-map', data );
+	});
+	
 });
 
+function hasColor(color){
+	return color !== 'none';
+}
+
 function getWidth(topLeft, bottomRight){
-	return bottomRight[0] - topLeft[0];
+	return bottomRight - topLeft;
 }
 
 function getHeight(topLeft, bottomRight){
-	return (topLeft[1] - bottomRight[1]) * -1;
+	return (topLeft - bottomRight) * -1;
 }
 
 function formatDate(dateStr){
