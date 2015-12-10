@@ -69,8 +69,22 @@ body {
 	font-size: 20px;
 }
 
+.comment {
+	height: 75px;
+	position: relative;
+}
+
+.comment-author {
+	position: absolute;
+	bottom: 0;
+}
+
 #comments-container {
-	clear: left;
+	/*clear: left;*/
+	width: 61%;
+	height: 375px;
+	overflow-y: scroll;
+	margin-left: 20px;
 }
 
 #comment-input {

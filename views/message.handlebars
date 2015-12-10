@@ -17,8 +17,11 @@
 	</div>
 	<div id="comments-container">
 		{{#each comments}}
-			<div class="comment">{{{comment}}}</div>
-			<h4>-----------------------------------</h4>
+			<div class="comment">
+				<div class="comment-text">{{{comment}}}</div>
+				<div class="comment-author">Added by: {{{username}}}</div>
+			</div>
+			<h4>---------------------------------------------</h4>
 		{{/each}}
 	</div>
 	<div id="write-container">

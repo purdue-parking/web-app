@@ -47,13 +47,14 @@ $('#saveNewMsg').click(function(){
 		$('#messageTextArea').val('');
 		$('#isHelpNeeded').prop('checked', false);
 
-		var rowHtml = '<tr class="message-row" id="' + data.messageID + '"><td class="message-field">' + data.message + '</td>' +
-					'<td class="message-votes"><div id="voteCount" style="float: left; margin-left: 8px; margin-top: 4px">' + data.votes + '</div>' +
-					'<div class="vote-buttons" style="float: left"><button type="button" class="btn btn-info up-btn">' +
-					'<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>' +
-					'<button type="button" class="btn btn-info down-btn"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button></div></td></tr>';
+		// var rowHtml = '<tr class="message-row" id="' + data.messageID + '"><td class="message-field">' + data.message + '</td>' +
+		// 			'<td class="message-votes"><div id="voteCount" style="float: left; margin-left: 8px; margin-top: 4px">' + data.votes + '</div>' +
+		// 			'<div class="vote-buttons" style="float: left"><button type="button" class="btn btn-info up-btn">' +
+		// 			'<span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>' +
+		// 			'<button type="button" class="btn btn-info down-btn"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button></div></td></tr>';
 	
-		$('#msg-table-body').prepend(rowHtml);
+		// $('#msg-table-body').prepend(rowHtml);
+		window.location = window.location;
 	});
 	console.log(message);
 	console.log(isHelpNeeded);
