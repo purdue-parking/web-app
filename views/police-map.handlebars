@@ -4,59 +4,46 @@
 		<div hidden>
 			<img id="canvasImg" alt="Right Click to Save Me" display="none">
 		</div>
-		<!--<input type="file" id="uploadimage" onclick="upload(this)">Upload</input>-->
-		<input name="file" type="file" id="uploadImage" class="cloudinary-fileupload" data-cloudinary-field="canvasImg"
-			data-form-data = ""></input>
 	</div>
 
-	<div id="buttonContainer">
-		<table id="settingsTable">
-			<tr id="toolbarRow" class="headerRow">
-				<th class="headerFont" colspan="4">Toolbar</th>
-			</tr>
-			<tr>
-				<td><button id="line" onclick="changeShape(this)">Line</button></td>
-				<td><button id="rectangle" onclick="changeShape(this)">Rectangle</button></td>
-			</tr>
-			<tr class="headerRow">
-				<th class="headerFont"colspan="4">Color</th>
-			</tr>
-			<tr>
-				<td><button id="purple"onclick="color(this)">Purple</button></td>
-				<td><button id="green"onclick="color(this)">Green</button></td>
-				<td><button id="yellow"onclick="color(this)">Yellow</button></td>
-				<td><button id="brown"onclick="color(this)">Brown</button></td>
-			</tr>
-			<tr class="headerRow">
-				<th class="headerFont" colspan="4">Size</th>
-			</tr>
-			<tr>
-				<td><button id="small"onclick="changeSize(this)">Small</button></td>
-				<td><button id="normal"onclick="changeSize(this)">Normal</button></td> 
-				<td><button id="large"onclick="changeSize(this)">Large</button></td>
-				<td><button id="huge"onclick="changeSize(this)">Huge</button></td> 
-			</tr>
-			<tr>
-				<td><button id="clearButton" onclick="clearCanvas()">Clear</button></td>
-				<td><button id="saveButton" onclick="save()">Save</button></td>
-			</tr>
-		</table> 
+	<div id="toolbarContainer">
+		<h4>Toolbar</h4>
+		<p>
+			<td><button type="button" class="btn btn-info" id="black"onclick="color(this)">Black</button></td>
+			<td><button type="button" class="btn btn-info" id="green"onclick="color(this)">Green</button></td>
+			<td><button type="button" class="btn btn-info" id="purple"onclick="color(this)">Purple</button></td>
+		</p>
+
+		<td><button type="button" class="btn btn-primary" id="clearButton" onclick="clearCanvas()">Clear</button></td>
+		<td><button type="button" class="btn btn-primary" id="saveButton" onclick="save()">Save</button></td>
 	</div>
+
+
 </div>
 
 <div class="modal fade" id="myModal">
   	<div class="modal-dialog">
     	<div class="modal-content">
       		<div class="modal-header">
-        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        		<h4 class="modal-title">Save Image</h4>
+        		<button type="button" id="topCloseButton" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        		<h4 class="modal-title">Set Restrictions</h4>
       		</div>
       		<div class="modal-body">
-      	 		<h4>Name:</h4><input type="text" class="save-image-field" id="save-image-name"></input>
+      	 		<h4>Parking Passes Allowed:</h4>
+      	 		<select class="parking-restrictions" id="parking-pass-restrictions">
+      	 			<option value="No Parking"> No Parking </option>
+      	 			<option value="A"> A </option>
+      	 			<option value="A,B"> A,B </option>
+      	 			<option value="A,B,C"> A,B,C </option>
+      	 			<option value="Residence Halls"> Residence Halls </option>
+      	 		</select>
+      	 		<h4>Time Restricted</h4>
+      	 		<input type="time" class="parking-restrictions" id="earlier-time-restrictions">
+      	 		<input type="time" class="parking-restrictions" id="later-time-restrictions">
      		</div>
       		<div class="modal-footer">
-        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-       			<button type="button" class="btn btn-primary" data-dismiss="modal" id="saveImageButton">Save</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal" id="closeButton">Close</button>
+       			<button type="button" class="btn btn-primary" id="updateRestButton">Update</button>
       		</div>
     	</div><!-- /.modal-content -->
   	</div><!-- /.modal-dialog -->
@@ -66,11 +53,6 @@
 	$(document).ready(function() {
 		prepareCanvas();
 	});
-
-	$.cloudinary.config({
-		"api_key": process.env.CLOUDINARY_KEY;
-		"cloud_name": process.env.CLOUDINARY_CLOUD_NAME;
-	})
 </script>
 
 <script src="/public/js/police-map.js"></script>

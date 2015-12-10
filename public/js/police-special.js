@@ -7,6 +7,15 @@ $('#newEventButton').click(function(){
 	var eventName = $('#new-event-name').val();
 	var eventDescription = $('#new-event-description').val();
 
+	/*$.ajax({
+		url: window.location,
+		method: 'POST', 
+		contentType = 'application/json',
+		data: JSON.stringify({
+
+		})
+	});*/
+
 	$('#eventTable').append(newRow(eventDate, eventName, eventDescription));
 });
 

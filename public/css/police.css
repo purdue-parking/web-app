@@ -1,6 +1,6 @@
-#buttonContainer{
+#toolbarContainer{
 	width: 400px;
-	height: 300px;
+	height: 500px;
 	float: left;
 	padding: 0px 10px;
 }
@@ -17,10 +17,3 @@
 	display: inline-block;
 }
 
-.headerRow{
-	font-style: bold;
-}
-
-.headerFont{
-	font-style: bold;
-}

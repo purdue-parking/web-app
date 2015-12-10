@@ -16,6 +16,11 @@ var drawShape = "line";
 var topMap = new Image();
 var imageName;
 
+var restricted_points = [];
+var restricted_passes = [];
+var restricted_times = [];
+var rp_inc = 0;
+
 function prepareCanvas(){
 	canvas = document.getElementById('mapCanvas');
 	ctx = canvas.getContext("2d");
@@ -38,90 +43,28 @@ function prepareCanvas(){
 	topMap.onload = function(){
 		ctx.drawImage(topMap, 0, 0);
 	}
+
+	drawShape = "rect";
+	canvas.style.cursor="crosshair";
 	topMap.src = "/public/images/purdue_campus_map.jpg";
 }
-
-/*function upload(e){
-	var reader = new FileReader();
-	reader.onload = function(event){
-		var img = new Image();
-		img.onload = function(){
-			canvas.width = img.width;
-			canvas.height = img.height;
-			ctx.drawImage(img, 0, 0);
-		}
-		img.src = event.target.result;
-	}
-	reader.readAsDataURL(e.target.files[0])
-}*/
 
 function color(obj){
 	switch(obj.id){
 		case "green":
 			drawColor = "green";
 			break;
-		case "blue":
-			drawColor = "blue";
-			break;
 		case "red":
 			drawColor = "red";
-			break;
-		case "yellow":
-			drawColor = "yellow";
-			break;
-		case "orange":
-			drawColor = "orange";
-			break;
-		case "black":
-			drawColor = "black";
-			break;
-		case "white":
-			drawColor = white;
 			break;
 		case "purple":
 			drawColor = "purple";
 			break;
-		case "brown":
-			drawColor = "brown";
-			break;
 	}
-	if (drawColor == "white")
-		drawWidth = 14;
-	else
-		drawWidth = 2;
+	drawWidth = 2;
 }
 
-function changeSize(obj){
-	switch(obj.id){
-		case "small":
-			drawWidth = 2;
-			break;
-		case "normal":
-			drawWidth = 5;
-			break;
-		case "large":
-			drawWidth = 8;
-			break;
-		case "huge":
-			drawWidth = 11;
-			break;
-	}
-}
-
-function changeShape(obj){
-	switch(obj.id){
-		case "line":
-			drawShape = "line";
-			canvas.style.cursor="default";
-			break;
-		case "rectangle":
-			drawShape = "rect";
-			canvas.style.cursor="crosshair";
-			break;
-	}
-}
-
-function draw(){
+/*function draw(){
 	ctx.beginPath();
 	ctx.moveTo(prevX, prevY);
 	ctx.lineTo(currX, currY);
@@ -129,7 +72,7 @@ function draw(){
 	ctx.lineWidth = drawWidth;
 	ctx.stroke();
 	ctx.closePath();
-}
+}*/
 
 function clearCanvas(){
 	console.log("Clearing the canvas");
@@ -142,11 +85,6 @@ function clearCanvas(){
 }
 
 function save(){
-	console.log("Saving the element");
-	$('#myModal').modal('show');
-}
-
-$('#saveImageButton').click(function(){
 	imageName = $('#save-image-name').val();
 	console.log(imageName);
 	document.getElementById("canvasImg").style.border = "2px solid";
@@ -155,37 +93,26 @@ $('#saveImageButton').click(function(){
 	document.getElementById("canvasImg").src = dataURL;
 	document.getElementById("canvasImg").style.display = "inline";
 
-	$.ajax({
-		url: window.location,
-		method: 'POST',
-		contentType: 'application/json',
-		data: JSON.stringify({
-			image: canvasImg,
-			name: imageName
-		}),
-		success: function(respose){
-			console.log(response);
-		}
-	})
+	var x = 0;
+	for(x; x < rp_inc; x++){
+		console.log("New ajax");
+		console.log("Points: (" + restricted_points[x][0] + "," + restricted_points[x][1] + ") -> (" + restricted_points[x][2] + "," + restricted_points[x][3] + ")");
+		console.log("Times: " + restricted_times[x][0] + "->" + restricted_times[x][1]);
+		console.log("Passes: " + restricted_passes[x]);
+		/*$.ajax({
+			url: window.location,
+			method: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({
 
-	/*console.log(cloudinary_name);
-	console.log(cloudinary_key);
-	console.log(cloudinary_secret);
-
-	$.cloudinary.config({
-		cloud_name: cloudinary_name, 
-		api_key: cloudinary_key
-	});
-
-	$('.upload_form').append($.cloudinary.unsigned_upload_tag("image", {
-		cloud_name: cloudinary_name
-	}));*/
-});
-
+			})
+		})*/
+	}
+}
 
 function findxy(res, e){
 	if(res == "down"){
-		if(drawShape == "line"){
+		/*if(drawShape == "line"){
 			prevX = currX;
 			prevY = currY;
 			getCursorPosition(e);
@@ -200,11 +127,11 @@ function findxy(res, e){
 				ctx.closePath()
 				dot_flag = false;
 			}
-		}
-		else if(drawShape == "rect"){
-			getCursorPosition(e);
-			console.log(currX, currY);
-		}
+		}*/
+		//else if(drawShape == "rect"){
+		getCursorPosition(e);
+		console.log(currX, currY);
+		//}
 	}
 	if(res == 'up'){
 		isDrawing = false;
@@ -217,9 +144,6 @@ function findxy(res, e){
 			ctx.strokeStyle = drawColor;
 			ctx.lineWidth = drawWidth;
 			drawRect();
-
-			ctx.stroke();
-			ctx.closePath();
 		}
 	}
 	if(res == 'out'){
@@ -245,34 +169,121 @@ function getCursorPosition(e){
 }
 
 function drawRect(){
-	ctx.moveTo(prevX, prevY); //Move to the top left
-	ctx.lineTo(currX, prevY); //Draw to the top right
-	ctx.lineTo(currX, currY); //Draw to the bottom right
-	ctx.lineTo(prevX, currY); //Draw to the bottom left
-	ctx.lineTo(prevX, prevY); //Draw to the top left
+	// Get the rest of the restriction points
+	$('#myModal').modal('show');
+}
 
-	var rectangle_width = Math.abs(currX - prevX);
-	var number_of_lines = 5;
-	var move_by = rectangle_width / number_of_lines;
+$('#topCloseButton').click(function(){
+	ctx.stroke();
+	ctx.closePath();
+})
 
-	var x = 0;
-	for(x; x < number_of_lines; x++){
-		if(currX > prevX && currY < prevY)
-		{
-			ctx.moveTo(currX - (x*move_by), prevY);
-			ctx.lineTo(currX - ((x+1)*move_by), currY);
+$('#closeButton').click(function(){
+	ctx.stroke();
+	ctx.closePath();
+})
+
+$('#updateRestButton').click(function(){
+	console.log("Draw the rectangle");
+	var allowed_parking = $('#parking-pass-restrictions').val();
+	var first_time = $('#earlier-time-restrictions').val();
+	var second_time = $('#later-time-restrictions').val();
+
+	if(first_time > second_time){
+		window.alert("The first time entered is greater than the second time");
+	}
+	else if(first_time == "" || second_time == ""){
+		window.alert("Please set all values");
+	}
+	else{ // Draw the Rectanggle
+		ctx.moveTo(prevX, prevY); //Move to the top left
+		ctx.lineTo(currX, prevY); //Draw to the top right
+		ctx.lineTo(currX, currY); //Draw to the bottom right
+		ctx.lineTo(prevX, currY); //Draw to the bottom left
+		ctx.lineTo(prevX, prevY); //Draw to the top left
+
+		var rectangle_width = Math.abs(currX - prevX);
+		var number_of_lines = 5;
+		var move_by = rectangle_width / number_of_lines;
+
+		var x = 0;
+		for(x; x < number_of_lines; x++){
+			if(currX > prevX && currY < prevY)
+			{
+				ctx.moveTo(currX - (x*move_by), prevY);
+				ctx.lineTo(currX - ((x+1)*move_by), currY);
+			}
+			else if(currX > prevX && currY > prevY){
+				ctx.moveTo(currX - (x*move_by), currY);
+				ctx.lineTo(currX -((x+1)*move_by), prevY);
+			}
+			else if(currX < prevX && currY < prevY){
+				ctx.moveTo(prevX - (x*move_by), prevY);
+				ctx.lineTo(prevX - ((x+1)*move_by), currY);
+			}
+			else{
+				ctx.moveTo(prevX - (x*move_by), currY);
+				ctx.lineTo(prevX - ((x+1)*move_by), prevY);
+			}
 		}
-		else if(currX > prevX && currY > prevY){
-			ctx.moveTo(currX - (x*move_by), currY);
-			ctx.lineTo(currX -((x+1)*move_by), prevY);
-		}
-		else if(currX < prevX && currY < prevY){
-			ctx.moveTo(prevX - (x*move_by), prevY);
-			ctx.lineTo(prevX - ((x+1)*move_by), currY);
+		console.log("finished drawing rectangle");
+		ctx.stroke();
+		ctx.closePath();
+
+		// Find the top left and bottom right points
+		var top_leftx, top_lefty, bot_rightx, bot_righty;
+		if(prevX < currX){
+			top_leftx = prevX;
+			bot_rightx = currX;
 		}
 		else{
-			ctx.moveTo(prevX - (x*move_by), currY);
-			ctx.lineTo(prevX - ((x+1)*move_by), prevY);
+			top_leftx = currX;
+			bot_rightx = prevX
 		}
+		if(prevY < currY){
+			top_lefty = prevY;
+			bot_righty = currY;
+		}
+		else{
+			top_lefty = currY;
+			bot_righty = prevY;
+		}
+
+		// Input the restricted points into the array
+		restricted_points[rp_inc] = [top_leftx, top_lefty, bot_rightx, bot_righty];
+
+		// Change the first time to the correct format
+		var hours = first_time.substring(0,2);
+		var rest = first_time.substring(2);
+		var ampm = "A.M.";
+
+		if(hours > 12){
+			hours -= 12;
+			ampm = "P.M.";
+		}
+
+		first_time = hours + rest + " " + ampm;
+		
+		// Change the second time to the correct format
+		hours = second_time.substring(0,2);
+		rest = second_time.substring(2);
+		ampm = "A.M.";
+
+		if(hours > 12){
+			hours -= 12;
+			ampm = "P.M.";
+		}
+
+		second_time = hours + rest + " " + ampm;
+
+		// Input the times into the array
+		restricted_times[rp_inc] = [first_time, second_time];
+
+		// Input the passes into the array
+		restricted_passes[rp_inc] = allowed_parking;
+
+		// Increment all of the arrays
+		rp_inc++;
+		$('#myModal').modal('hide');		// Hide the modal
 	}
-}
+});
