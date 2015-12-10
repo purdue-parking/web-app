@@ -8,7 +8,13 @@
 	<h4>Username: </h4><input type="text" class="account-field" id="username-field" disabled value={{username}}></input>
 	<h4>Phone number: </h4><input type="text" class="account-field" id="phone-field" disabled value={{phoneNumber}}></input>
 	<h4>Email: </h4><input type="text" class="account-field" id="email-field" disabled value={{email}}></input>
+	<h4>Password: </h4><input type="password" class="account-field" id="password-field" dsiabled value={{{password}}}></input>
 	<h4>Account type: </h4><input type="text" class="account-field-dis" id="account-type-field" disabled value={{{accountType}}}></input>
+	<h3>Notification Settings</h3>
+	<h4>Email for ticket: <input type="checkbox" class="account-field" id="ticket-email" disabled {{#if ticketEmail}}checked{{/if}}></input></h4>
+	<h4>Email when someone replies to my message: <input type="checkbox" class="account-field" id="response-email" disabled {{#if responseEmail}}checked{{/if}}></input></h4>
+	<h4>Email when someone posts a new help needed: <input type="checkbox" class="account-field" id="help-email" disabled {{#if helpEmail}}checked{{/if}}></input></h4>
+
 </div>
 
 <button class="btn btn-primary" id="editBtn">Edit Account</button>
