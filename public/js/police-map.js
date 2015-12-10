@@ -19,6 +19,7 @@ var imageName;
 var restricted_points = [];
 var restricted_passes = [];
 var restricted_times = [];
+var restricted_color = [];
 var rp_inc = 0;
 
 function prepareCanvas(){
@@ -93,20 +94,31 @@ function save(){
 	document.getElementById("canvasImg").src = dataURL;
 	document.getElementById("canvasImg").style.display = "inline";
 
+	$.ajax({
+		url: window.location,
+		method: 'DELETE'
+	});
+
 	var x = 0;
 	for(x; x < rp_inc; x++){
 		console.log("New ajax");
 		console.log("Points: (" + restricted_points[x][0] + "," + restricted_points[x][1] + ") -> (" + restricted_points[x][2] + "," + restricted_points[x][3] + ")");
 		console.log("Times: " + restricted_times[x][0] + "->" + restricted_times[x][1]);
 		console.log("Passes: " + restricted_passes[x]);
-		/*$.ajax({
+		$.ajax({
 			url: window.location,
 			method: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify({
-
+				x1: restricted_points[x][0],
+				y1: restricted_points[x][1],
+				x2: restricted_points[x][2],
+				y2: restricted_points[x][3],
+				parkingPasses: restricted_passes[x],
+				timeRestrictions: restricted_times[x][0] + "-" + restricted_times[x][1],
+				color: restricted_color[x]
 			})
-		})*/
+		})
 	}
 }
 
@@ -255,32 +267,41 @@ $('#updateRestButton').click(function(){
 		// Change the first time to the correct format
 		var hours = first_time.substring(0,2);
 		var rest = first_time.substring(2);
-		var ampm = "A.M.";
+		var ampm = "a.m.";
 
 		if(hours > 12){
 			hours -= 12;
-			ampm = "P.M.";
+			ampm = "p.m.";
+		}
+		else if(hours == 12){
+			ampm = "p.m.";
 		}
 
-		first_time = hours + rest + " " + ampm;
+		first_time = hours + rest + ampm;
 		
 		// Change the second time to the correct format
 		hours = second_time.substring(0,2);
 		rest = second_time.substring(2);
-		ampm = "A.M.";
+		ampm = "a.m.";
 
 		if(hours > 12){
 			hours -= 12;
-			ampm = "P.M.";
+			ampm = "p.m.";
+		}
+		else if(hours == 12){
+			ampm = "p.m.";
 		}
 
-		second_time = hours + rest + " " + ampm;
+		second_time = hours + rest + ampm;
 
 		// Input the times into the array
 		restricted_times[rp_inc] = [first_time, second_time];
 
 		// Input the passes into the array
 		restricted_passes[rp_inc] = allowed_parking;
+
+		// Input the color into the array
+		restricted_color[rp_inc] = drawColor;
 
 		// Increment all of the arrays
 		rp_inc++;
