@@ -7,6 +7,8 @@ require('dotenv').load();
 var router = express.Router();
 
 router.get( '/auth', function( req, res ){
+	//Cloudinary cloudinary = new Cloudinary("cloudinary://CLOUDINARY_URL");
+
 	log.info("ROUTE: GET /picture/auth");
 	var shasum = crypto.createHash('sha1');
 	var timestamp = ""+Math.round((new Date()).getTime() / 1000); //UNIX timestamp
@@ -20,7 +22,7 @@ router.get( '/auth', function( req, res ){
 	var signature = shasum.digest( 'hex' );
 	var auth = {
 		'signature': signature
-		,'public_id': public_id
+		, 'public_id': public_id
 		, 'timestamp': timestamp
 		, 'api_key': process.env.CLOUDINARY_KEY
 	}

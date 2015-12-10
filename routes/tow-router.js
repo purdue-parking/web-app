@@ -8,15 +8,15 @@ var jsonParser = bodyParser.json();
 var url_base = 'https://purdue-parking.appspot.com/_ah/api/purdueParking/1/'
 
 router.get('/', function(req, res){
-  res.render( 'tow-home', {layout: 'tow-layout'} ); 		
+  	res.render( 'tow-tickets', {layout: 'tow-layout'} ); 		
 });
 
 router.get('/account', function(req, res){
 	var accountData={
-	account:[
-		{name: "Denver Kirschling", username: "dkirschl", account_type: "Police Officer"}	
-	],
-	layout: 'tow-layout'
+		account:[
+			{name: "Denver Kirschling", username: "dkirschl", account_type: "Police Officer"}	
+		],
+		layout: 'tow-layout'
 	}
 	res.render( 'tow-account', accountData );
 });
