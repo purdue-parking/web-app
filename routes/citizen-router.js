@@ -132,6 +132,9 @@ router.get('/messages', function(req, res){
 				formatDate: formatDate
 			}
 		}
+		if(req.query.username === 'wlpolice'){
+			_.extend(extension, {layout: 'police-layout'})
+		}
 		res.render( 'message-board', _.extend(JSON.parse(body), extension) );
 	});
 });
@@ -167,7 +170,16 @@ router.get('/messages/sortHelp', function(req, res){
 			res.send(error);
 		}
 		// console.log(JSON.parse(body));
-		res.render( 'message-board', JSON.parse(body) );
+		var extension = {
+			helpers: {
+				formatDate: formatDate
+			}
+		}
+
+		if(req.query.username === 'wlpolice'){
+			_.extend(extension, {layout: 'police-layout'})
+		}
+		res.render( 'message-board', _.extend(JSON.parse(body), extension) );
 	});
 });
 
@@ -182,7 +194,16 @@ router.get('/messages/sortVotes', function(req, res){
 			res.send(error);
 		}
 		// console.log(JSON.parse(body));
-		res.render( 'message-board', JSON.parse(body) );
+		var extension = {
+			helpers: {
+				formatDate: formatDate
+			}
+		}
+		
+		if(req.query.username === 'wlpolice'){
+			_.extend(extension, {layout: 'police-layout'})
+		}
+		res.render( 'message-board', _.extend(JSON.parse(body), extension) );
 	});
 });
 

@@ -17,7 +17,7 @@ $('#login-btn').click(function(){
 			transfer = window.location + 'citizen/messages?username=' + user;
 		}
 		else if(acctInfo.accountType === "POLICE"){
-			transfer = window.location + 'police/tickets';
+			transfer = window.location + 'police/tickets?username=' + user;
 		}
 		else{
 			transfer = window.location + 'tow';

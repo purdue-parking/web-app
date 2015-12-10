@@ -13,8 +13,8 @@ router.get('/', function(req, res){
 	//Get all tickets function since they are a police man/woman
 	console.log("Getting all the tickets");
 	request({
-		url: url_base + 'ticketcollection',
-		method: 'GET'
+		url: url_base + 'ticketcollection/' + req.query.username,
+		method: 'POST'
 	},
 	function(error, response, body){
 		if(error){
@@ -30,16 +30,40 @@ router.get('/', function(req, res){
 	})
 });	
 
-router.get('/special', function(req, res){
-	res.render( 'police-special', {layout: 'police-layout'} );
+function formatDate(dateStr){
+	if( dateStr ){
+		var date = new Date(dateStr);
+		return date.toLocaleString();
+	}
+	else
+		return '';
+}
+
+router.get('/messages', function(req, res){
+	request({
+		url: url_base + 'usermessagecollection/1'
+		, method: 'GET'
+	},
+	function(error, response, body){
+		if(error){
+			res.send(error);
+		}
+		var extension = {
+			layout: 'police-layout'
+			, helpers: {
+				formatDate: formatDate
+			}
+		}
+		res.render( 'message-board',  _.extend(JSON.parse(body), extension) );
+	});
 });
 
 router.get('/tickets', function(req, res){
 	//Get all tickets function since they are a police man/woman
 	console.log("Getting all the tickets");
 	request({
-		url: url_base + 'ticketcollection',
-		method: 'GET'
+		url: url_base + 'ticketcollection/' + req.query.username,
+		method: 'POST'
 	},
 	function(error, response, body){
 		if(error){

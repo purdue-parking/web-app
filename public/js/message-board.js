@@ -17,11 +17,11 @@ $('.message-field').click(function(){
 
 $('#sortHelp').click(function(){
 	console.log("click");
-	window.location = location.origin + '/citizen/messages/sortHelp';
+	window.location = location.origin + '/citizen/messages/sortHelp?username=' + user;
 });
 
 $('#sortVotes').click(function(){
-	window.location = location.origin + '/citizen/messages/sortVotes';
+	window.location = location.origin + '/citizen/messages/sortVotes?username=' + user;
 });
 
 $('#add-msg').click(function(){
@@ -33,7 +33,7 @@ $('#saveNewMsg').click(function(){
 	var isHelpNeeded = $('#isHelpNeeded').prop('checked');
 
 	$.ajax({
-		url: window.location
+		url: location.origin + '/citizen/messages'
 		, method: 'POST'
 		, contentType: 'application/json'
 		, data: JSON.stringify({
