@@ -58,6 +58,11 @@ body {
 	height: 75px;
 }
 
+.special-row {
+	outline: solid gold;
+	outline-width: 2px;
+}
+
 .message-author {
 	position: absolute;
 	bottom: 0;
