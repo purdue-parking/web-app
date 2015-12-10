@@ -84,9 +84,41 @@ router.get('/map', function(req, res){
 });
 
 router.get('/account', function(req, res){
-	console.log("Getting the police account page");
-	res.render( 'police-account', {layout: 'police-layout'});
-})
+	var username = req.query.username;
+	//TODO: make api call to get helper data
+	//getAccount function not written in API yet
+	request({
+		url: url_base + 'entity/' + username,
+		method: 'GET',
+	},
+	function(error, response, body){
+		if(error){
+			console.log("ERROR: ", error);
+			res.sendStatus(400);
+		}
+		else{
+			console.log('GET account response:', JSON.parse(body));
+			// console.log(JSON.parse(body).properties);
+			// console.log(JSON.parse(body).properties);
+			res.render( 'police-account', _.extend(JSON.parse(body).properties, {layout: 'police-layout'}));
+		}
+	});
+	//res.render( 'citizen-account', testData );
+});
+
+router.put('/account', jsonParser, function(req, res){
+	//tempUser = req.body;
+	// console.log("Here: ", req.body);
+	request({
+		url: url_base + 'editAccount?alt=json',
+		method: 'POST',
+		json: req.body
+	},
+	function(error, response, body){
+		if(error)
+			console.log("ERROR: ", error);
+	});
+});
 
 router.post('/tickets', jsonParser, function(req, res){
 	request({
@@ -107,7 +139,7 @@ router.post('/tickets', jsonParser, function(req, res){
 
 router.post('/map', jsonParser, function(req, res){
 	request({
-		url: url_base + '',
+		url: url_base + 'addLotInfo?alt=json',
 		method: 'POST',
 		json: req.body
 	},
@@ -120,6 +152,21 @@ router.post('/map', jsonParser, function(req, res){
 		}
 	});
 });
+
+router.delete('/map', jsonParser, function(req, res){
+	request({
+		url: url_base + 'coloredlotinfo',
+		method: 'DELETE'
+	},
+	function(error, response, body){
+		if(error)
+			console.log("ERROR: ", error);
+		else{
+			res.status(200);
+			res.send(body);
+		}
+	})
+})
 
 
 module.exports = router;
