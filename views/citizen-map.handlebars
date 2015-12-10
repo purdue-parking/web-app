@@ -1,9 +1,9 @@
 <h2>Parking Restricitions Map</h2>
 
 <div id="map-container">
-{{#each items}}
+	{{#each items}}
 		<div id="{{pid}}" class="parking-info" data-toggle="popover" data-trigger="hover" data-content="{{timeRestrictions}}" title="Parking Passes: {{parkingPasses}}" style="background-color: {{color}}; z-index: {{getZindex color}}; left: {{x1}}px; top: {{y1}}px; width: {{getWidth x1 x2}}px; height: {{getHeight y1 y2}}px;"></div>
-{{/each}}
+	{{/each}}
 <img id="map-img" src="/public/images/purdue_campus_map.jpg">
 
 </div>
